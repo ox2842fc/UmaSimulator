@@ -9,32 +9,32 @@ const double jibanValue = 12;
 const double vitalFactorStart = 5;
 const double vitalFactorEnd = 8;
 
-const double reserveStatusFactor = 30;//¿ØÊôĞÔÊ±¸øÃ¿»ØºÏÔ¤Áô¶àÉÙ£¬´Ó0Öğ½¥Ôö¼Óµ½Õâ¸öÊı×Ö
+const double reserveStatusFactor = 30;//æ§å±æ€§æ—¶ç»™æ¯å›åˆé¢„ç•™å¤šå°‘ï¼Œä»0é€æ¸å¢åŠ åˆ°è¿™ä¸ªæ•°å­—
 
 const double smallFailValue = -150;
 const double bigFailValue = -500;
-const double outgoingBonusIfNotFullMotivation = 150;//µôĞÄÇéÊ±Ìá¸ßÍâ³ö·ÖÊı
-const double nonTrainBonus = 100;//Õâ»ØºÏ²»ÑµÁ·ÏÂ»ØºÏ+3µÄbonus£¬³Ë Ê£Óà»ØºÏÊı/TOTAL_TURN
-const double raceBonus = 200;//±ÈÈüÊÕÒæ£¬²»¿¼ÂÇÌåÁ¦
+const double outgoingBonusIfNotFullMotivation = 150;//æ‰å¿ƒæƒ…æ—¶æé«˜å¤–å‡ºåˆ†æ•°
+const double nonTrainBonus = 100;//è¿™å›åˆä¸è®­ç»ƒä¸‹å›åˆ+3çš„bonusï¼Œä¹˜ å‰©ä½™å›åˆæ•°/TOTAL_TURN
+const double raceBonus = 200;//æ¯”èµ›æ”¶ç›Šï¼Œä¸è€ƒè™‘ä½“åŠ›
 
-const double colorBuffEvalRaw[3] = { 70,100,50 };//ÈıÉ«buff¹ÀÖµ,ÆäÖĞºìbuff³Ëturn/TOTAL_TURN
-const double colorLevelEvalRaw[3] = { 6,6,4 };//²»¿¼ÂÇ´Õ´ó»áÄ¿±êµÄÈıÉ«ÑµÁ·µÈ¼¶¹ÀÖµ
-const double colorLevelTargetFactor = 100;//´Õ´ó»áÄ¿±êµÄÏµÊı
+const double colorBuffEvalRaw[3] = { 70,100,50 };//ä¸‰è‰²buffä¼°å€¼,å…¶ä¸­çº¢buffä¹˜turn/TOTAL_TURN
+const double colorLevelEvalRaw[3] = { 6,6,4 };//ä¸è€ƒè™‘å‡‘å¤§ä¼šç›®æ ‡çš„ä¸‰è‰²è®­ç»ƒç­‰çº§ä¼°å€¼
+const double colorLevelTargetFactor = 100;//å‡‘å¤§ä¼šç›®æ ‡çš„ç³»æ•°
 
-const double xiangtanEvalBasicStart = 40;//ÏûºÄÒ»´ÎÏàÌ¸µÄ¹ÀÖµË¥¼õ(¸Õ¿ª¾Ö)
-const double xiangtanEvalBasicEnd = 40;//ÏûºÄÒ»´ÎÏàÌ¸µÄ¹ÀÖµË¥¼õ(½áÊø)
-//ÏÂÃæµÄ²ÎÊıÈ«ÊÇÆ¾¸Ğ¾õÏ¹È¡µÄ£¬»¹ĞèÒªµ÷²Î
+const double xiangtanEvalBasicStart = 40;//æ¶ˆè€—ä¸€æ¬¡ç›¸è°ˆçš„ä¼°å€¼è¡°å‡(åˆšå¼€å±€)
+const double xiangtanEvalBasicEnd = 40;//æ¶ˆè€—ä¸€æ¬¡ç›¸è°ˆçš„ä¼°å€¼è¡°å‡(ç»“æŸ)
+//ä¸‹é¢çš„å‚æ•°å…¨æ˜¯å‡­æ„Ÿè§‰çå–çš„ï¼Œè¿˜éœ€è¦è°ƒå‚
 const double xiangtanRemainEvalTable[3][12] =
 {
   {0,5,7,8,9,10,11,11,12,12,12,12},
   {0,2,5,6,7,7,8,8,9,9,10,10},
   {0,0,2,5,5,6,6,7,7,7,8,8}
 };
-//const double xiangtanExhaustLossMax = 800;//ÏàÌ¸ºÄ¾¡ÇÒÃ»´ï±êµÄ¹ÀÖµ¿Û·Ö
+//const double xiangtanExhaustLossMax = 800;//ç›¸è°ˆè€—å°½ä¸”æ²¡è¾¾æ ‡çš„ä¼°å€¼æ‰£åˆ†
 
-static void levelGainEvaluation(const Game& g, double* result) { //result[0:3]ÒÀ´ÎÊÇÈıÖÖÑÕÉ«µÄ¹ÀÖµ
-  bool hasTarget1 = g.turn < 72;//»¹ÓĞÖÁÉÙÒ»´Îuaf
-  bool hasTarget2 = g.turn < 60;//»¹ÓĞÖÁÉÙÁ½´Îuaf
+static void levelGainEvaluation(const Game& g, double* result) { //result[0:3]ä¾æ¬¡æ˜¯ä¸‰ç§é¢œè‰²çš„ä¼°å€¼
+  bool hasTarget1 = g.turn < 72;//è¿˜æœ‰è‡³å°‘ä¸€æ¬¡uaf
+  bool hasTarget2 = g.turn < 60;//è¿˜æœ‰è‡³å°‘ä¸¤æ¬¡uaf
 
   int uafRemainTurn = (g.turn / 12 + 1) * 12 - g.turn - 1;
   if (g.turn < 12)uafRemainTurn += 12;
@@ -75,10 +75,10 @@ static void levelGainEvaluation(const Game& g, double* result) { //result[0:3]ÒÀ
   result[1] = gain[1];
   result[2] = gain[2];
 }
-static double levelGainEvaluationFriendOutgoing(const Game& g) { //ÓÑÈËÍâ³ö´ÕµÈ¼¶ÊÕÒæ£¨²»¿¼ÂÇcolorLevelEvalRaw£©
+static double levelGainEvaluationFriendOutgoing(const Game& g) { //å‹äººå¤–å‡ºå‡‘ç­‰çº§æ”¶ç›Šï¼ˆä¸è€ƒè™‘colorLevelEvalRawï¼‰
 
-  bool hasTarget1 = g.turn < 72;//»¹ÓĞÖÁÉÙÒ»´Îuaf
-  bool hasTarget2 = g.turn < 60;//»¹ÓĞÖÁÉÙÁ½´Îuaf
+  bool hasTarget1 = g.turn < 72;//è¿˜æœ‰è‡³å°‘ä¸€æ¬¡uaf
+  bool hasTarget2 = g.turn < 60;//è¿˜æœ‰è‡³å°‘ä¸¤æ¬¡uaf
 
   int uafRemainTurn = (g.turn / 12 + 1) * 12 - g.turn - 1;
   if (g.turn < 12)uafRemainTurn += 12;
@@ -108,28 +108,28 @@ static double levelGainEvaluationFriendOutgoing(const Game& g) { //ÓÑÈËÍâ³ö´ÕµÈ¼
   }
   return friendTargetBonus;
 }
-//Ò»¸ö·Ö¶Îº¯Êı£¬ÓÃÀ´¿ØÊôĞÔ
-inline double statusSoftFunction(double x, double reserve, double reserveInvX2)//reserveÊÇ¿ØÊôĞÔ±£Áô¿Õ¼ä£¨½µµÍÈ¨ÖØ£©£¬reserveInvX2ÊÇ1/(2*reserve)
+//ä¸€ä¸ªåˆ†æ®µå‡½æ•°ï¼Œç”¨æ¥æ§å±æ€§
+inline double statusSoftFunction(double x, double reserve, double reserveInvX2)//reserveæ˜¯æ§å±æ€§ä¿ç•™ç©ºé—´ï¼ˆé™ä½æƒé‡ï¼‰ï¼ŒreserveInvX2æ˜¯1/(2*reserve)
 {
   if (x >= 0)return 0;
   if (x > -reserve)return -x * x * reserveInvX2;
   return x + 0.5 * reserve;
 }
 
-static void statusGainEvaluation(const Game& g, double* result) { //resultÒÀ´ÎÊÇÎåÖÖÑµÁ·µÄ¹ÀÖµ
-  int remainTurn = TOTAL_TURN - g.turn - 2;//Õâ´ÎÑµÁ·ºó»¹ÓĞ¼¸¸öÑµÁ·»ØºÏ
-  if (remainTurn == 2)remainTurn = 1;//uraµÚ¶ş»ØºÏ
-  else if (remainTurn >= 4)remainTurn -= 2;//uraµÚÒ»»ØºÏ
+static void statusGainEvaluation(const Game& g, double* result) { //resultä¾æ¬¡æ˜¯äº”ç§è®­ç»ƒçš„ä¼°å€¼
+  int remainTurn = TOTAL_TURN - g.turn - 2;//è¿™æ¬¡è®­ç»ƒåè¿˜æœ‰å‡ ä¸ªè®­ç»ƒå›åˆ
+  if (remainTurn == 2)remainTurn = 1;//uraç¬¬äºŒå›åˆ
+  else if (remainTurn >= 4)remainTurn -= 2;//uraç¬¬ä¸€å›åˆ
 
   double reserve = reserveStatusFactor * remainTurn * (1 - double(remainTurn) / (TOTAL_TURN * 2));
   double reserveInvX2 = 1 / (2 * reserve);
 
   double finalBonus0 = g.uaf_haveLose ? 30 : 55;
-  finalBonus0 += 20;//ura3ºÍ×îÖÕÊÂ¼ş
+  finalBonus0 += 20;//ura3å’Œæœ€ç»ˆäº‹ä»¶
   if (remainTurn >= 1)finalBonus0 += 15;//ura2
   if (remainTurn >= 2)finalBonus0 += 15;//ura1
 
-  double remain[5]; //Ã¿ÖÖÊôĞÔ»¹ÓĞ¶àÉÙ¿Õ¼ä
+  double remain[5]; //æ¯ç§å±æ€§è¿˜æœ‰å¤šå°‘ç©ºé—´
 
   for (int i = 0; i < 5; i++)
   {
@@ -160,7 +160,7 @@ static void statusGainEvaluation(const Game& g, double* result) { //resultÒÀ´ÎÊÇ
 
 
 
-static int countTurnNumBeforeXiangtanRefresh(const Game& g) { //ÏÂ´ÎÏàÌ¸Ë¢ĞÂÇ°»¹ÓĞ¶àÉÙÑµÁ·»ØºÏ£¬°üÀ¨µ±Ç°»ØºÏ
+static int countTurnNumBeforeXiangtanRefresh(const Game& g) { //ä¸‹æ¬¡ç›¸è°ˆåˆ·æ–°å‰è¿˜æœ‰å¤šå°‘è®­ç»ƒå›åˆï¼ŒåŒ…æ‹¬å½“å‰å›åˆ
   int turnNumBeforeRefresh = 0;
   int nextRefresh = (g.turn / 12 + 1) * 12;
   if (nextRefresh > TOTAL_TURN)nextRefresh = TOTAL_TURN;
@@ -213,7 +213,7 @@ static double vitalEvaluation(int vital, int maxVital)
     return vitalEvaluation(maxVital, maxVital);
 }
 
-static double nonTrainEvaluation(const Game& g)//ÏÂ»ØºÏ+3¼¶µÄ¹ÀÖµ
+static double nonTrainEvaluation(const Game& g)//ä¸‹å›åˆ+3çº§çš„ä¼°å€¼
 {
   if (g.isRacingTurn[g.turn + 1])return 0;
   return (1.0 - double(g.turn) / double(TOTAL_TURN)) * nonTrainBonus;
@@ -242,7 +242,7 @@ Action Evaluator::handWrittenStrategy(const Game& game)
 
   double nonTrainE = nonTrainEvaluation(game);
 
-  //Íâ³ö/ĞİÏ¢
+  //å¤–å‡º/ä¼‘æ¯
   {
     bool isFriendOutgoingAvailable =
       game.lianghua_type != 0 &&
@@ -250,7 +250,7 @@ Action Evaluator::handWrittenStrategy(const Game& game)
       game.lianghua_outgoingUsed < 5 &&
       (!game.isXiahesu());
     Action action = { TRA_rest,0 };
-    if (isFriendOutgoingAvailable)action.train = TRA_outgoing;//ÓĞÓÑÈËÍâ³öÓÅÏÈÍâ³ö£¬·ñÔòĞİÏ¢
+    if (isFriendOutgoingAvailable)action.train = TRA_outgoing;//æœ‰å‹äººå¤–å‡ºä¼˜å…ˆå¤–å‡ºï¼Œå¦åˆ™ä¼‘æ¯
 
     int vitalGain = isFriendOutgoingAvailable ? 50 : game.isXiahesu() ? 40 : 50;
     bool addMotivation = game.motivation < 5 && (isFriendOutgoingAvailable || game.isXiahesu());
@@ -269,7 +269,7 @@ Action Evaluator::handWrittenStrategy(const Game& game)
       bestAction = action;
     }
   }
-  //±ÈÈü
+  //æ¯”èµ›
   Action raceAction = { TRA_race,0 };
   if(game.isLegal(raceAction))
   {
@@ -291,7 +291,7 @@ Action Evaluator::handWrittenStrategy(const Game& game)
   }
 
 
-  //ÑµÁ·
+  //è®­ç»ƒ
   for (int xt = 0; xt < 10; xt++)
   {
     if (!game.isXiangtanLegal(xt))
@@ -309,16 +309,16 @@ Action Evaluator::handWrittenStrategy(const Game& game)
     {
       Action action = { tra,xt };
       Action actionNoXt = { tra,XT_none };
-      if (!g.isLegal(actionNoXt))continue; //ÓĞÊ±ºò¶à½øĞĞÒ»´Î·ÏÏàÌ¸·ÖÊı²»»á±ä£¬µ«ÊÇºóĞø·Çlegal¿ÉÄÜÓĞ±¨´í
+      if (!g.isLegal(actionNoXt))continue; //æœ‰æ—¶å€™å¤šè¿›è¡Œä¸€æ¬¡åºŸç›¸è°ˆåˆ†æ•°ä¸ä¼šå˜ï¼Œä½†æ˜¯åç»­élegalå¯èƒ½æœ‰æŠ¥é”™
       double value = statusGainE[tra]+levelGainE[g.uaf_trainingColor[tra]];
 
 
-      //´¦ÀíhintºÍî¿°í
-      int cardHintNum = 0;//ËùÓĞhintËæ»úÈ¡Ò»¸ö£¬ËùÒÔ´ò·ÖµÄÊ±ºòÈ¡Æ½¾ù
+      //å¤„ç†hintå’Œç¾ç»Š
+      int cardHintNum = 0;//æ‰€æœ‰hintéšæœºå–ä¸€ä¸ªï¼Œæ‰€ä»¥æ‰“åˆ†çš„æ—¶å€™å–å¹³å‡
       for (int j = 0; j < 5; j++)
       {
         int p = g.personDistribution[tra][j];
-        if (p < 0)break;//Ã»ÈË
+        if (p < 0)break;//æ²¡äºº
         if (g.persons[p].isHint)
           cardHintNum += 1;
       }
@@ -328,9 +328,9 @@ Action Evaluator::handWrittenStrategy(const Game& game)
       for (int j = 0; j < 5; j++)
       {
         int pi = g.personDistribution[tra][j];
-        if (pi < 0)break;//Ã»ÈË
+        if (pi < 0)break;//æ²¡äºº
         const Person& p = g.persons[pi];
-        if (p.personType == 1)//ÓÑÈË¿¨
+        if (p.personType == 1)//å‹äººå¡
         {
           if (p.friendOrGroupCardStage == 0)
             value += 150;
@@ -370,7 +370,7 @@ Action Evaluator::handWrittenStrategy(const Game& game)
       int vitalAfterTrain = std::min(maxVitalEquvalant, g.trainVitalChange[tra] + g.vital);
       value += vitalFactor * (vitalEvaluation(vitalAfterTrain, g.maxVital) - vitalEvalBeforeTrain);
 
-      //µ½Ä¿Ç°ÎªÖ¹¶¼ÊÇÑµÁ·³É¹¦µÄvalue
+      //åˆ°ç›®å‰ä¸ºæ­¢éƒ½æ˜¯è®­ç»ƒæˆåŠŸçš„value
       double failRate = g.failRate[tra];
       if (failRate > 0)
       {
@@ -381,7 +381,7 @@ Action Evaluator::handWrittenStrategy(const Game& game)
         value = 0.01 * failRate * failValueAvg + (1 - 0.01 * failRate) * value;
       }
 
-      //ÏûºÄÁËÏàÌ¸ºÍÈıÉ«buff£¬¿Ûµô¶ÔÓ¦·ÖÊı
+      //æ¶ˆè€—äº†ç›¸è°ˆå’Œä¸‰è‰²buffï¼Œæ‰£æ‰å¯¹åº”åˆ†æ•°
       value -= xiangtanCost[Action::XiangtanNumCost[xt]];
       for(int i=0;i<3;i++)
         if (g.uaf_buffNum[i] > 0)
@@ -391,7 +391,7 @@ Action Evaluator::handWrittenStrategy(const Game& game)
           value -= buffLoss;
         }
 
-      //ÏàÌ¸ÓÃÍêÇÒ´æÔÚÎ´´ï±êÑµÁ·£¬Ôò¶îÍâ¿Û·Ö
+      //ç›¸è°ˆç”¨å®Œä¸”å­˜åœ¨æœªè¾¾æ ‡è®­ç»ƒï¼Œåˆ™é¢å¤–æ‰£åˆ†
       /*
       if (xt != XT_none && (g.uaf_xiangtanRemain == 0))
       {

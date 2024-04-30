@@ -5,7 +5,7 @@
 #include "../External/json.hpp"
 using json = nlohmann::json;
 
-// 模板函数不能放在cpp里，否则会找不到符号
+// 妯℃澘鍑芥暟涓嶈兘鏀惧湪cpp閲岋紝鍚﹀垯浼氭壘涓嶅埌绗﹀彿
 template <typename T>
 json arrayToJson(T* arr, int len)
 {
@@ -29,7 +29,7 @@ int jsonToArray(const json& j, T* buf, int bufSize)
 	return count;
 }
 
-// 引用windows.h的函数需要放在cpp里，避免污染全局命名空间
+// 寮曠敤windows.h鐨勫嚱鏁伴渶瑕佹斁鍦╟pp閲岋紝閬垮厤姹℃煋鍏ㄥ眬鍛藉悕绌洪棿
 std::string string_To_UTF8(const std::string& str);
 std::string UTF8_To_string(const std::string& str);
 #endif

@@ -7,27 +7,27 @@ const Action Action::Action_RedistributeCardsForTest = { TRA_redistributeCardsFo
 
 const std::string Action::trainingName[8] =
 {
-  "ËÙ",
-  "ÄÍ",
-  "Á¦",
-  "¸ù",
-  "ÖÇ",
-  "ĞİÏ¢",
-  "Íâ³ö",
-  "±ÈÈü"
+  "é€Ÿ",
+  "è€",
+  "åŠ›",
+  "æ ¹",
+  "æ™º",
+  "ä¼‘æ¯",
+  "å¤–å‡º",
+  "æ¯”èµ›"
 };
 const std::string Action::xiangtanName[10] =
 {
-  "ÎŞ",
-  "À¶->ºì",
-  "À¶->»Æ",
-  "ºì->À¶",
-  "ºì->»Æ",
-  "»Æ->À¶",
-  "»Æ->ºì",
-  "È«À¶",
-  "È«ºì",
-  "È«»Æ",
+  "æ— ",
+  "è“->çº¢",
+  "è“->é»„",
+  "çº¢->è“",
+  "çº¢->é»„",
+  "é»„->è“",
+  "é»„->çº¢",
+  "å…¨è“",
+  "å…¨çº¢",
+  "å…¨é»„",
 };
 
 int Action::toInt() const
@@ -55,5 +55,5 @@ Action Action::intToAction(int i)
 
 std::string Action::toString() const
 {
-  return trainingName[train] + " ÏàÌ¸:" + xiangtanName[xiangtanType];
+  return trainingName[train] + " ç›¸è°ˆ:" + xiangtanName[xiangtanType];
 }

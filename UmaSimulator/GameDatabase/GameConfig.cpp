@@ -1,4 +1,4 @@
-﻿#include "GameConfig.h"
+#include "GameConfig.h"
 #include "../GameDatabase/GameConstants.h"
 
 using namespace std;

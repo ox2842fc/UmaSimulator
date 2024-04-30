@@ -25,20 +25,20 @@ void main_playerPlay()
   SearchParam param(searchN, radicalFactor);
 
 
-  cout << termcolor::cyan << "ÈüÂíÄïUAF¾ç±¾Óý³ÉÄ£ÄâÆ÷ v0.1" << termcolor::reset << endl;
-  cout << termcolor::cyan << "×÷Õß Sigmoid£¬QQ: 2658628026" << termcolor::reset << endl;
-  cout << termcolor::cyan << "´úÂë¿ªÔ´£º" << termcolor::yellow << "https://github.com/hzyhhzy/UmaAi" << termcolor::reset << endl;
-  cout << termcolor::bright_cyan << "´ËÄ£ÄâÆ÷½çÃæÀàËÆ¡°Ð¡ºÚ°å¡±¡£ÎªÁË·½±ã£¬²¢Ã»ÓÐÂò¼¼ÄÜµÄ¹¦ÄÜ£¬°Ñ¹ÌÓÐ¼¼ÄÜºÍ¸÷ÖÖ¼¼ÄÜhint¶¼»»Ëã³Épt£¬Ã¿pt¼ÆÎª" << GameConstants::ScorePtRate << "·Ö£¨ÇÐÕß" << GameConstants::ScorePtRate * 1.1 << "·Ö£©" << termcolor::reset << endl;
-  cout << termcolor::bright_cyan << "ËùÓÐLv2µÄÉý¼¶£¨Ïû³ýdebuff£©¾ù×Ô¶¯½øÐÐ£¬Lv3ÐèÒªÍæ¼ÒÊÖ¶¯¹ºÂò" << termcolor::reset << endl;
-  cout << termcolor::bright_cyan << "µÚ¶þÄêµÄ¿­ÐýÃÅÔÊÐí²»ÏûÖÇÁ¦debuff£¬Èç¹ûpt²»¹»Ïû³ýÆäËûdebuffÔòÄ£ÄâÆ÷°´Êä¿­ÐýÃÅ¼ÆËã" << termcolor::reset << endl;
+  cout << termcolor::cyan << "èµ›é©¬å¨˜UAFå‰§æœ¬è‚²æˆæ¨¡æ‹Ÿå™¨ v0.1" << termcolor::reset << endl;
+  cout << termcolor::cyan << "ä½œè€… Sigmoidï¼ŒQQ: 2658628026" << termcolor::reset << endl;
+  cout << termcolor::cyan << "ä»£ç å¼€æºï¼š" << termcolor::yellow << "https://github.com/hzyhhzy/UmaAi" << termcolor::reset << endl;
+  cout << termcolor::bright_cyan << "æ­¤æ¨¡æ‹Ÿå™¨ç•Œé¢ç±»ä¼¼â€œå°é»‘æ¿â€ã€‚ä¸ºäº†æ–¹ä¾¿ï¼Œå¹¶æ²¡æœ‰ä¹°æŠ€èƒ½çš„åŠŸèƒ½ï¼ŒæŠŠå›ºæœ‰æŠ€èƒ½å’Œå„ç§æŠ€èƒ½hintéƒ½æ¢ç®—æˆptï¼Œæ¯ptè®¡ä¸º" << GameConstants::ScorePtRate << "åˆ†ï¼ˆåˆ‡è€…" << GameConstants::ScorePtRate * 1.1 << "åˆ†ï¼‰" << termcolor::reset << endl;
+  cout << termcolor::bright_cyan << "æ‰€æœ‰Lv2çš„å‡çº§ï¼ˆæ¶ˆé™¤debuffï¼‰å‡è‡ªåŠ¨è¿›è¡Œï¼ŒLv3éœ€è¦çŽ©å®¶æ‰‹åŠ¨è´­ä¹°" << termcolor::reset << endl;
+  cout << termcolor::bright_cyan << "ç¬¬äºŒå¹´çš„å‡¯æ—‹é—¨å…è®¸ä¸æ¶ˆæ™ºåŠ›debuffï¼Œå¦‚æžœptä¸å¤Ÿæ¶ˆé™¤å…¶ä»–debuffåˆ™æ¨¡æ‹Ÿå™¨æŒ‰è¾“å‡¯æ—‹é—¨è®¡ç®—" << termcolor::reset << endl;
   cout << endl;
 
   random_device rd;
   auto rand = mt19937_64(rd());
 
-  int umaId = 103001;//Ã×Ô¡
+  int umaId = 103001;//ç±³æµ´
   int umaStars = 5;
-  int cards[6] = { 301884,301344,301614,300194,300114,301074 };//ÓÑÈË£¬¸ß·å£¬ÉñÓ¥£¬ÎÚÀ­À­£¬·çÉñ£¬Ë¾»ú
+  int cards[6] = { 301884,301344,301614,300194,300114,301074 };//å‹äººï¼Œé«˜å³°ï¼Œç¥žé¹°ï¼Œä¹Œæ‹‰æ‹‰ï¼Œé£Žç¥žï¼Œå¸æœº
   int zhongmaBlue[5] = { 18,0,0,0,0 };
   int zhongmaBonus[6] = { 20,0,40,0,20,150 };
 
@@ -77,13 +77,13 @@ void main_playerPlay()
 
 
     cout << termcolor::bright_blue << "------------------------------------------------------------------------------------------------" << termcolor::reset << endl;
-    cout << termcolor::green << "ÄãÑøµÄÂíÊÇ£º" << GameDatabase::AllUmas[umaId].name << termcolor::reset << endl;
-    cout << termcolor::green << "ÄãµÄÅä¿¨ÊÇ£º";
+    cout << termcolor::green << "ä½ å…»çš„é©¬æ˜¯ï¼š" << GameDatabase::AllUmas[umaId].name << termcolor::reset << endl;
+    cout << termcolor::green << "ä½ çš„é…å¡æ˜¯ï¼š";
     for (int i = 0; i < 6; i++)
       cout << GameDatabase::AllCards[cards[i]].cardName << ",";
     cout << termcolor::reset << endl;
     {
-      cout << termcolor::bright_cyan << "°´Enter¼ü¿ªÊ¼ÓÎÏ·" << termcolor::reset << endl;
+      cout << termcolor::bright_cyan << "æŒ‰Enteré”®å¼€å§‹æ¸¸æˆ" << termcolor::reset << endl;
       if (gamenum != 0)std::cin.ignore(1000000, '\n');
       std::cin.get();
     }
@@ -92,8 +92,8 @@ void main_playerPlay()
 
     while(game.turn < TOTAL_TURN)
     {
-      std::this_thread::sleep_for(std::chrono::seconds(1));//µÈ¼¸ÃëÈÃÈË¿´Çå³þ
-      //assert(turn == game.turn && "»ØºÏÊý²»ÕýÈ·");
+      std::this_thread::sleep_for(std::chrono::seconds(1));//ç­‰å‡ ç§’è®©äººçœ‹æ¸…æ¥š
+      //assert(turn == game.turn && "å›žåˆæ•°ä¸æ­£ç¡®");
       game.print();
 
       if (game.turn < TOTAL_TURN - 1){
@@ -104,24 +104,24 @@ void main_playerPlay()
         Action handWrittenStrategy = Evaluator::handWrittenStrategy(game);
         string strategyText[10] =
         {
-          "ËÙ",
-          "ÄÍ",
-          "Á¦",
-          "¸ù",
-          "ÖÇ",
+          "é€Ÿ",
+          "è€",
+          "åŠ›",
+          "æ ¹",
+          "æ™º",
           "SS",
-          "ÐÝÏ¢",
-          "ÓÑÈËÍâ³ö",
-          "ÆÕÍ¨Íâ³ö",
-          "±ÈÈü"
+          "ä¼‘æ¯",
+          "å‹äººå¤–å‡º",
+          "æ™®é€šå¤–å‡º",
+          "æ¯”èµ›"
         };
-        cout << "ÊÖÐ´Âß¼­£º" << strategyText[handWrittenStrategy.train];
+        cout << "æ‰‹å†™é€»è¾‘ï¼š" << strategyText[handWrittenStrategy.train];
         if (game.larc_isAbroad)
         {
           cout << "   ";
           if (!handWrittenStrategy.buy50p)
-            cout << "²»";
-          cout << "¹ºÂò+50%";
+            cout << "ä¸";
+          cout << "è´­ä¹°+50%";
         }
         cout << endl;
 
@@ -132,18 +132,18 @@ void main_playerPlay()
         for (int i = 0; i < Search::buyBuffChoiceNum(game.turn); i++)
         {
           if (Search::buyBuffChoiceNum(game.turn) > 1 && i == 0)
-            cout << "²»Âò:              ";
+            cout << "ä¸ä¹°:              ";
           if (i == 1)
-            cout << "Âò+50%:            ";
+            cout << "ä¹°+50%:            ";
           if (i == 2 && game.turn < 50)
-            cout << "Âòpt+10:           ";
+            cout << "ä¹°pt+10:           ";
           if (i == 2 && game.turn >= 50)
-            cout << "ÂòÌåÁ¦-20%:        ";
+            cout << "ä¹°ä½“åŠ›-20%:        ";
           if (i == 3 && game.turn < 50)
-            cout << "Âò+50%Óëpt+10:     ";
+            cout << "ä¹°+50%ä¸Žpt+10:     ";
           if (i == 3 && game.turn >= 50)
-            cout << "Âò+50%ÓëÌåÁ¦-20%:  ";
-          cout << "ËÙÄÍÁ¦¸ùÖÇ: ";
+            cout << "ä¹°+50%ä¸Žä½“åŠ›-20%:  ";
+          cout << "é€Ÿè€åŠ›æ ¹æ™º: ";
           for (int j = 0; j < 10; j++)
           {
             double score = search.allChoicesValue[i][j].value;
@@ -154,10 +154,10 @@ void main_playerPlay()
             else
               cout << "-- ";
             if (j == 4)cout << " | SS:";
-            if (j == 5)cout << " | ÐÝÏ¢:";
-            if (j == 6)cout << " ÓÑÈËÍâ³ö:";
-            if (j == 7)cout << " ÆÕÍ¨Íâ³ö:";
-            if (j == 8)cout << " ±ÈÈü:";
+            if (j == 5)cout << " | ä¼‘æ¯:";
+            if (j == 6)cout << " å‹äººå¤–å‡º:";
+            if (j == 7)cout << " æ™®é€šå¤–å‡º:";
+            if (j == 8)cout << " æ¯”èµ›:";
           }
           cout << endl;
         }
@@ -183,11 +183,11 @@ void main_playerPlay()
 
      // auto tdata = search.exportTrainingSample();
 
-      if (game.isRacing)//±ÈÈü»ØºÏ
+      if (game.isRacing)//æ¯”èµ›å›žåˆ
       {
-        assert(false && "±ÈÈü»ØºÏÓ¦¸ÃÒÑ¾­ÔÚgameÀàÀïÌø¹ý");
+        assert(false && "æ¯”èµ›å›žåˆåº”è¯¥å·²ç»åœ¨gameç±»é‡Œè·³è¿‡");
       }
-      else//³£¹æÑµÁ·»ØºÏ
+      else//å¸¸è§„è®­ç»ƒå›žåˆ
       {
         Action action;
         action.train = -1;
@@ -195,7 +195,7 @@ void main_playerPlay()
 
         string s;
 
-        cout << termcolor::cyan << "ÇëÑ¡ÔñÑµÁ·£º1ËÙ£¬2ÄÍ£¬3Á¦£¬4¸ù£¬5ÖÇ£¬S¼üSS¶ÔÕ½£¬aÓÑÈË³öÐÐ£¬bÆÕÍ¨³öÐÐ£¬cÐÝÏ¢£¬d¶îÍâ±ÈÈü£¬remakeÖØ¿ª£¬cheat×÷±×" << termcolor::reset << endl;
+        cout << termcolor::cyan << "è¯·é€‰æ‹©è®­ç»ƒï¼š1é€Ÿï¼Œ2è€ï¼Œ3åŠ›ï¼Œ4æ ¹ï¼Œ5æ™ºï¼ŒSé”®SSå¯¹æˆ˜ï¼Œaå‹äººå‡ºè¡Œï¼Œbæ™®é€šå‡ºè¡Œï¼Œcä¼‘æ¯ï¼Œdé¢å¤–æ¯”èµ›ï¼Œremakeé‡å¼€ï¼Œcheatä½œå¼Š" << termcolor::reset << endl;
        
         cin >> s;
 
@@ -214,7 +214,7 @@ void main_playerPlay()
           action.train = 5;
         else if (s == "a")
         {
-          cout << termcolor::green << "ÄãÈ·¶¨Òª³öÐÐÂð£¿ÊäÈëyÈ·ÈÏ£¬ÊäÈënÖØÐÂÑ¡Ôñ" << termcolor::reset << endl;
+          cout << termcolor::green << "ä½ ç¡®å®šè¦å‡ºè¡Œå—ï¼Ÿè¾“å…¥yç¡®è®¤ï¼Œè¾“å…¥né‡æ–°é€‰æ‹©" << termcolor::reset << endl;
           cin >> s;
           if (s != "y")
             continue;
@@ -222,7 +222,7 @@ void main_playerPlay()
         }
         else if (s == "b")
         {
-          cout << termcolor::green << "ÄãÈ·¶¨Òª³öÐÐÂð£¿ÊäÈëyÈ·ÈÏ£¬ÊäÈënÖØÐÂÑ¡Ôñ" << termcolor::reset << endl;
+          cout << termcolor::green << "ä½ ç¡®å®šè¦å‡ºè¡Œå—ï¼Ÿè¾“å…¥yç¡®è®¤ï¼Œè¾“å…¥né‡æ–°é€‰æ‹©" << termcolor::reset << endl;
           cin >> s;
           if (s != "y")
             continue;
@@ -230,7 +230,7 @@ void main_playerPlay()
         }
         else if (s == "c")
         {
-          cout << termcolor::green << "ÄãÈ·¶¨ÒªÐÝÏ¢Âð£¿ÊäÈëyÈ·ÈÏ£¬ÊäÈënÖØÐÂÑ¡Ôñ" << termcolor::reset << endl;
+          cout << termcolor::green << "ä½ ç¡®å®šè¦ä¼‘æ¯å—ï¼Ÿè¾“å…¥yç¡®è®¤ï¼Œè¾“å…¥né‡æ–°é€‰æ‹©" << termcolor::reset << endl;
           cin >> s;
           if (s != "y")
             continue;
@@ -238,7 +238,7 @@ void main_playerPlay()
         }
         else if (s == "d")
         {
-          cout << termcolor::green << "ÄãÈ·¶¨Òª±ÈÈüÂð£¿ÊäÈëyÈ·ÈÏ£¬ÊäÈënÖØÐÂÑ¡Ôñ" << termcolor::reset << endl;
+          cout << termcolor::green << "ä½ ç¡®å®šè¦æ¯”èµ›å—ï¼Ÿè¾“å…¥yç¡®è®¤ï¼Œè¾“å…¥né‡æ–°é€‰æ‹©" << termcolor::reset << endl;
           cin >> s;
           if (s != "y")
             continue;
@@ -246,16 +246,16 @@ void main_playerPlay()
         }
         else if (s == "remake")
         {
-          cout << termcolor::bright_red << "ÄãÈ·¶¨ÒªÖØ¿ªÂð£¿ÊäÈëremakeÈ·ÈÏÖØ¿ª£¬ÊäÈëÈÎÒâÆäËûÄÚÈÝ¼ÌÐøÓÎÏ·" << termcolor::reset << endl;
+          cout << termcolor::bright_red << "ä½ ç¡®å®šè¦é‡å¼€å—ï¼Ÿè¾“å…¥remakeç¡®è®¤é‡å¼€ï¼Œè¾“å…¥ä»»æ„å…¶ä»–å†…å®¹ç»§ç»­æ¸¸æˆ" << termcolor::reset << endl;
           cin >> s;
           if (s != "remake")
             continue;
-          cout << termcolor::red << "Äã°Ñ" << termcolor::green << GameDatabase::AllUmas[umaId].name << termcolor::red << "×ö³ÉÂíÈâºº±¤ÁË" << termcolor::reset << endl;
+          cout << termcolor::red << "ä½ æŠŠ" << termcolor::green << GameDatabase::AllUmas[umaId].name << termcolor::red << "åšæˆé©¬è‚‰æ±‰å ¡äº†" << termcolor::reset << endl;
           break;
         }
-        else if (s == "cheat")//ÖØÖÃ¿¨×é·ÖÅä
+        else if (s == "cheat")//é‡ç½®å¡ç»„åˆ†é…
         {
-          cout << termcolor::bright_cyan << "¿¨×éÖØÐÂ·ÖÅä£¡" << termcolor::reset << endl;
+          cout << termcolor::bright_cyan << "å¡ç»„é‡æ–°åˆ†é…ï¼" << termcolor::reset << endl;
           game.randomDistributeCards(rand);
           //game.print();
           continue;
@@ -275,7 +275,7 @@ void main_playerPlay()
         }
         else
         {
-          cout << termcolor::red << "ÊäÈëÓÐÎó£¬ÇëÖØÐÂÊäÈë" << termcolor::reset << endl;
+          cout << termcolor::red << "è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << termcolor::reset << endl;
           continue;
         }
 
@@ -301,7 +301,7 @@ void main_playerPlay()
 
         if (game.venusAvailableWisdom != 0)
         {
-          cout << termcolor::cyan << "ÊÇ·ñ¿ªÆôÅ®Éñî£ÖÇ£¿y¿ªÆô£¬n²»¿ªÆô" << termcolor::reset << endl;
+          cout << termcolor::cyan << "æ˜¯å¦å¼€å¯å¥³ç¥žç¿æ™ºï¼Ÿyå¼€å¯ï¼Œnä¸å¼€å¯" << termcolor::reset << endl;
           cin >> s;
           if (s == "y")
           {
@@ -313,7 +313,7 @@ void main_playerPlay()
           }
           else
           {
-            cout << termcolor::red << "ÊäÈëÓÐÎó£¬ÇëÖØÐÂÊäÈë" << termcolor::reset << endl;
+            cout << termcolor::red << "è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << termcolor::reset << endl;
             continue;
           }
         }
@@ -321,7 +321,7 @@ void main_playerPlay()
 
         if (chosenTrain == 7 && game.turn <= 12)
         {
-          cout << termcolor::red << "Ç°13»ØºÏÎÞ·¨±ÈÈü" << termcolor::reset << endl;
+          cout << termcolor::red << "å‰13å›žåˆæ— æ³•æ¯”èµ›" << termcolor::reset << endl;
           continue;
         }
 
@@ -331,7 +331,7 @@ void main_playerPlay()
         int chosenOutgoing = 5;
         if (chosenTrain == 6 && game.venusCardUnlockOutgoing)
         {
-          cout << termcolor::cyan << "ÇëÑ¡ÔñÍâ³ö£º0ÎªÆÕÍ¨Íâ³ö£¬Îå¸öÅ®ÉñÍâ³ö·Ö±ðÎª 1 2 3 4 5" << termcolor::reset << endl;
+          cout << termcolor::cyan << "è¯·é€‰æ‹©å¤–å‡ºï¼š0ä¸ºæ™®é€šå¤–å‡ºï¼Œäº”ä¸ªå¥³ç¥žå¤–å‡ºåˆ†åˆ«ä¸º 1 2 3 4 5" << termcolor::reset << endl;
           cin >> s;
           if (s == "0")
             chosenOutgoing = 5;
@@ -347,26 +347,26 @@ void main_playerPlay()
             chosenOutgoing = 4;
           else
           {
-            cout << termcolor::red << "ÊäÈëÓÐÎó£¬ÇëÖØÐÂÊäÈë" << termcolor::reset << endl;
+            cout << termcolor::red << "è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << termcolor::reset << endl;
             continue;
           }
 
           if (!game.isOutgoingLegal(chosenOutgoing))
           {
-            cout << termcolor::red << "²»ºÏ·¨µÄÍâ³ö£¬ÇëÖØÐÂÊäÈë" << termcolor::reset << endl;
+            cout << termcolor::red << "ä¸åˆæ³•çš„å¤–å‡ºï¼Œè¯·é‡æ–°è¾“å…¥" << termcolor::reset << endl;
             continue;
           }
         }
 
 
-        assert(game.cardData[0]->cardType == 5 && "ÉñÍÅ¿¨²»ÔÚµÚÒ»¸öÎ»ÖÃ");
+        assert(game.cardData[0]->cardType == 5 && "ç¥žå›¢å¡ä¸åœ¨ç¬¬ä¸€ä¸ªä½ç½®");
 
 
-        if (chosenTrain >= 0 && chosenTrain < 5 && game.cardDistribution[chosenTrain][0])//ÉñÍÅ¿¨ÔÚÑ¡ÔñµÄÑµÁ·
+        if (chosenTrain >= 0 && chosenTrain < 5 && game.cardDistribution[chosenTrain][0])//ç¥žå›¢å¡åœ¨é€‰æ‹©çš„è®­ç»ƒ
         {
           if (chosenSpiritColor == -1)
           {
-            cout << termcolor::cyan << "Èç¹û³öÏÖÅ®ÉñÈýÑ¡Ò»ÊÂ¼þ£¬Ñ¡ÔñÊ²Ã´ÑÕÉ«µÄËéÆ¬£¿qºì£¬aÀ¶£¬z»Æ" << termcolor::reset << endl;
+            cout << termcolor::cyan << "å¦‚æžœå‡ºçŽ°å¥³ç¥žä¸‰é€‰ä¸€äº‹ä»¶ï¼Œé€‰æ‹©ä»€ä¹ˆé¢œè‰²çš„ç¢Žç‰‡ï¼Ÿqçº¢ï¼Œaè“ï¼Œzé»„" << termcolor::reset << endl;
             cin >> s;
             if (s == "q")
             {
@@ -382,12 +382,12 @@ void main_playerPlay()
             }
             else
             {
-              cout << termcolor::red << "ÊäÈëÓÐÎó£¬ÇëÖØÐÂÊäÈë" << termcolor::reset << endl;
+              cout << termcolor::red << "è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << termcolor::reset << endl;
               continue;
             }
           }
-          else//ÌáÇ°Ñ¡ÁËËéÆ¬ÁË
-            cout << termcolor::cyan << "ÒÑÌáÇ°Ñ¡ÔñËéÆ¬ÑÕÉ«" << termcolor::reset << endl;
+          else//æå‰é€‰äº†ç¢Žç‰‡äº†
+            cout << termcolor::cyan << "å·²æå‰é€‰æ‹©ç¢Žç‰‡é¢œè‰²" << termcolor::reset << endl;
 
         }*/
 
@@ -399,7 +399,7 @@ void main_playerPlay()
           game.randomDistributeCards(rand);
       }
     }
-    cout << termcolor::red << "Óý³É½áÊø£¡" << termcolor::reset << endl;
+    cout << termcolor::red << "è‚²æˆç»“æŸï¼" << termcolor::reset << endl;
     game.printFinalStats();
   }
 }

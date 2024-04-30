@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cassert>
 #include <vector>
 #include <iomanip>  // for std::setw

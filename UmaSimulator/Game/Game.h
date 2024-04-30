@@ -9,90 +9,90 @@ struct SearchParam;
 
 struct Game
 {
-  //ÏÔÊ¾Ïà¹Ø
-  bool playerPrint;//¸øÈËÍæµÄÊ±ºò£¬ÏÔÊ¾¸ü¶àĞÅÏ¢
+  //æ˜¾ç¤ºç›¸å…³
+  bool playerPrint;//ç»™äººç©çš„æ—¶å€™ï¼Œæ˜¾ç¤ºæ›´å¤šä¿¡æ¯
 
-  //»ù±¾×´Ì¬£¬²»°üÀ¨µ±Ç°»ØºÏµÄÑµÁ·ĞÅÏ¢
-  int32_t umaId;//ÂíÄï±àºÅ£¬¼ûKnownUmas.cpp
-  bool isLinkUma;//ÊÇ·ñÎªlinkÂí
-  bool isRacingTurn[TOTAL_TURN];//Õâ»ØºÏÊÇ·ñ±ÈÈü
-  int16_t fiveStatusBonus[5];//ÂíÄïµÄÎåÎ¬ÊôĞÔµÄ³É³¤ÂÊ
-  int16_t eventStrength;//Ã¿»ØºÏÓĞ£¨´ı²â£©¸ÅÂÊ¼ÓÕâÃ´¶àÊôĞÔ£¬Ä£ÄâÖ§Ô®¿¨ÊÂ¼ş
+  //åŸºæœ¬çŠ¶æ€ï¼Œä¸åŒ…æ‹¬å½“å‰å›åˆçš„è®­ç»ƒä¿¡æ¯
+  int32_t umaId;//é©¬å¨˜ç¼–å·ï¼Œè§KnownUmas.cpp
+  bool isLinkUma;//æ˜¯å¦ä¸ºlinké©¬
+  bool isRacingTurn[TOTAL_TURN];//è¿™å›åˆæ˜¯å¦æ¯”èµ›
+  int16_t fiveStatusBonus[5];//é©¬å¨˜çš„äº”ç»´å±æ€§çš„æˆé•¿ç‡
+  int16_t eventStrength;//æ¯å›åˆæœ‰ï¼ˆå¾…æµ‹ï¼‰æ¦‚ç‡åŠ è¿™ä¹ˆå¤šå±æ€§ï¼Œæ¨¡æ‹Ÿæ”¯æ´å¡äº‹ä»¶
 
-  int16_t turn;//»ØºÏÊı£¬´Ó0¿ªÊ¼£¬µ½77½áÊø
-  int16_t vital;//ÌåÁ¦£¬½Ğ×ö¡°vital¡±ÊÇÒòÎªÓÎÏ·Àï¾ÍÕâÑù½ĞµÄ
-  int16_t maxVital;//ÌåÁ¦ÉÏÏŞ
-  int16_t motivation;//¸É¾¢£¬´Ó1µ½5·Ö±ğÊÇ¾ø²»µ÷µ½¾øºÃµ÷
+  int16_t turn;//å›åˆæ•°ï¼Œä»0å¼€å§‹ï¼Œåˆ°77ç»“æŸ
+  int16_t vital;//ä½“åŠ›ï¼Œå«åšâ€œvitalâ€æ˜¯å› ä¸ºæ¸¸æˆé‡Œå°±è¿™æ ·å«çš„
+  int16_t maxVital;//ä½“åŠ›ä¸Šé™
+  int16_t motivation;//å¹²åŠ²ï¼Œä»1åˆ°5åˆ†åˆ«æ˜¯ç»ä¸è°ƒåˆ°ç»å¥½è°ƒ
 
-  int16_t fiveStatus[5];//ÎåÎ¬ÊôĞÔ£¬1200ÒÔÉÏ²»¼õ°ë
-  int16_t fiveStatusLimit[5];//ÎåÎ¬ÊôĞÔÉÏÏŞ£¬1200ÒÔÉÏ²»¼õ°ë
-  int16_t skillPt;//¼¼ÄÜµã
-  int16_t skillScore;//ÒÑÂò¼¼ÄÜµÄ·ÖÊı
+  int16_t fiveStatus[5];//äº”ç»´å±æ€§ï¼Œ1200ä»¥ä¸Šä¸å‡åŠ
+  int16_t fiveStatusLimit[5];//äº”ç»´å±æ€§ä¸Šé™ï¼Œ1200ä»¥ä¸Šä¸å‡åŠ
+  int16_t skillPt;//æŠ€èƒ½ç‚¹
+  int16_t skillScore;//å·²ä¹°æŠ€èƒ½çš„åˆ†æ•°
 
-  float ptScoreRate;//Ã¿pt¶àÉÙ·Ö
-  int16_t failureRateBias;//Ê§°ÜÂÊ¸Ä±äÁ¿¡£Á·Ï°ÉÏÊÖ=-2£¬Á·Ï°ÏÂÊÖ=2
-  //bool isQieZhe;//ÇĞÕß  ºÏ²¢µ½ptScoreRateÁË
-  bool isAiJiao;//°®½¿
-  bool isPositiveThinking;//¥İ¥¸¥Æ¥£¥ÖË¼¿¼£¬ÓÑÈËµÚÈı¶Î³öĞĞÑ¡ÉÏµÄbuff£¬¿ÉÒÔ·ÀÒ»´ÎµôĞÄÇé
+  float ptScoreRate;//æ¯ptå¤šå°‘åˆ†
+  int16_t failureRateBias;//å¤±è´¥ç‡æ”¹å˜é‡ã€‚ç»ƒä¹ ä¸Šæ‰‹=-2ï¼Œç»ƒä¹ ä¸‹æ‰‹=2
+  //bool isQieZhe;//åˆ‡è€…  åˆå¹¶åˆ°ptScoreRateäº†
+  bool isAiJiao;//çˆ±å¨‡
+  bool isPositiveThinking;//ãƒã‚¸ãƒ†ã‚£ãƒ–æ€è€ƒï¼Œå‹äººç¬¬ä¸‰æ®µå‡ºè¡Œé€‰ä¸Šçš„buffï¼Œå¯ä»¥é˜²ä¸€æ¬¡æ‰å¿ƒæƒ…
 
 
-  int16_t zhongMaBlueCount[5];//ÖÖÂíµÄÀ¶Òò×Ó¸öÊı£¬¼ÙÉèÖ»ÓĞ3ĞÇ
-  int16_t zhongMaExtraBonus[6];//ÖÖÂíµÄ¾ç±¾Òò×ÓÒÔ¼°¼¼ÄÜ°×Òò×Ó£¨µÈĞ§³Épt£©£¬Ã¿´Î¼Ì³Ğ¼Ó¶àÉÙ¡£È«´óÊ¦±­Òò×ÓµäĞÍÖµ´óÔ¼ÊÇ30ËÙ30Á¦200pt
+  int16_t zhongMaBlueCount[5];//ç§é©¬çš„è“å› å­ä¸ªæ•°ï¼Œå‡è®¾åªæœ‰3æ˜Ÿ
+  int16_t zhongMaExtraBonus[6];//ç§é©¬çš„å‰§æœ¬å› å­ä»¥åŠæŠ€èƒ½ç™½å› å­ï¼ˆç­‰æ•ˆæˆptï¼‰ï¼Œæ¯æ¬¡ç»§æ‰¿åŠ å¤šå°‘ã€‚å…¨å¤§å¸ˆæ¯å› å­å…¸å‹å€¼å¤§çº¦æ˜¯30é€Ÿ30åŠ›200pt
   
-  int16_t saihou;//Èüºó¼Ó³É
-  bool isRacing;//Õâ¸ö»ØºÏÊÇ·ñÔÚ±ÈÈü
+  int16_t saihou;//èµ›ååŠ æˆ
+  bool isRacing;//è¿™ä¸ªå›åˆæ˜¯å¦åœ¨æ¯”èµ›
 
-  Person persons[MAX_HEAD_NUM];//×î¶à9¸öÍ·¡£ÒÀ´ÎÊÇ6ÕÅ¿¨£¬ÀíÊÂ³¤6£¬¼ÇÕß7£¬Ã»´ø¿¨µÄÁ¹»¨8£¨´øÁ¹»¨¿¨ÁËÄÇ¾ÍÔÚÇ°6¸öÎ»ÖÃ£¬8ºÅÎ»ÖÃ¾Í¿ÕÏÂÁË£©¡£
-  int16_t personDistribution[5][5];//Ã¿¸öÑµÁ·ÓĞÄÄĞ©ÈËÍ·id£¬personDistribution[ÄÄ¸öÑµÁ·][µÚ¼¸¸öÈËÍ·]£¬¿ÕÎ»ÖÃÎª-1
-  int lockedTrainingId;//ÊÇ·ñËøÑµÁ·£¬ÒÔ¼°ËøÔÚÁËÄÄ¸öÑµÁ·¡£¿ÉÒÔÏÈ²»¼Ó£¬µÈai×öÍêÁËÓĞÊ±¼äÔÙ¼Ó¡£
-
-
-  //¾ç±¾Ïà¹Ø
-  int16_t uaf_trainingColor[5];//ÎåÖÖÑµÁ·µÄÑÕÉ«
-  int16_t uaf_trainingLevel[3][5];//ÈıÖÖÑÕÉ«ÎåÖÖÑµÁ·µÄµÈ¼¶
-  bool uaf_winHistory[5][3][5];//ÔË¶¯»áÀúÊ·Õ½¼¨
-  bool uaf_lastTurnNotTrain;//ÉÏ»ØºÏÊÇ·ñÃ»ÓĞÑµÁ·£¿Èç¹ûÃ»ÓĞ£¬Õâ»ØºÏµÄµÈ¼¶Ôö¼ÓÁ¿+3
-  int16_t uaf_xiangtanRemain;//»¹Ê£¼¸´ÎÏàÌ¸
-
-  int16_t uaf_buffActivated[3];//À¶ºì»ÆµÄbuffÒÑ¾­´¥·¢¹ı¼¸´ÎÁË£¿¼ÇÂ¼Õâ¸öÖ÷ÒªÊÇÓÃÀ´Ê¶±ğÊ²Ã´Ê±ºòÓ¦¸ÃÔö¼ÓÁ½»ØºÏbuff£¬±ÈÈç¼ÙÈçÑµÁ·ºóµÈ¼¶±ä³É370£¬ÕâÊ±Èç¹ûbuffActivated=6ÔòÔö¼Ó2»ØºÏbuff²¢¸Ä³É7£¨ËµÃ÷¸Õ¼¤»î350¼¶µÄbuff£©£¬Èç¹ûbuffActivated=7Ôò²»Ôö¼Óbuff£¨ËµÃ÷350¼¶µÄbuffÒÑ¾­¼¤»î¹ı£©
-  int16_t uaf_buffNum[3];//À¶ºì»ÆµÄbuff»¹Ê£¼¸¸ö£¿
-
-  //µ¥¶À´¦ÀíÁ¹»¨¿¨£¬ÒòÎª½Ó½ü±Ø´ø¡£ÆäËûÓÑÈËÍÅ¶Ó¿¨µÄÒÔºóÔÙ¿¼ÂÇ
-  int16_t lianghua_type;//0Ã»´øÁ¹»¨¿¨£¬1 ssr¿¨£¬2 r¿¨
-  int16_t lianghua_personId;//Á¹»¨¿¨ÔÚpersonsÀïµÄ±àºÅ
-  //int16_t lianghua_stage;//0ÊÇÎ´µã»÷£¬1ÊÇÒÑµã»÷µ«Î´½âËø³öĞĞ£¬2ÊÇÒÑ½âËø³öĞĞ    Õâ´Î£¬Á¹»¨¿¨ºÍÆäËûÓÑÈËµÄÕâ¸öÈ«·ÅÔÚPersonÀàÀïÁË
-  int16_t lianghua_outgoingUsed;//Á¹»¨µÄ³öĞĞÒÑ¾­×ßÁË¼¸¶ÎÁË   ÔİÊ±²»¿¼ÂÇÆäËûÓÑÈËÍÅ¶Ó¿¨µÄ³öĞĞ
-  double lianghua_vitalBonus;//Á¹»¨¿¨µÄ»Ø¸´Á¿±¶Êı£¨ÂúÆÆ1.60£©
-  double lianghua_statusBonus;//Á¹»¨¿¨µÄÊÂ¼şĞ§¹û±¶Êı£¨ÂúÆÆ1.25£©
-
-  bool lianghua_guyouEffective;//Á¹»¨¹ÌÓĞÊÇ·ñÉúĞ§£¬Ã¿´ÎrandomDistributeCardsµÄÊ±ºò¼ì²éÕâ¸ö£¬Èç¹ûssrÁ¹»¨î¿°í´óÓÚµÈÓÚ60ÇÒlianghua_guyouEffective=false£¬ÔòÉèÎªtrue²¢ÖØÖÃPerson.distribution
+  Person persons[MAX_HEAD_NUM];//æœ€å¤š9ä¸ªå¤´ã€‚ä¾æ¬¡æ˜¯6å¼ å¡ï¼Œç†äº‹é•¿6ï¼Œè®°è€…7ï¼Œæ²¡å¸¦å¡çš„å‡‰èŠ±8ï¼ˆå¸¦å‡‰èŠ±å¡äº†é‚£å°±åœ¨å‰6ä¸ªä½ç½®ï¼Œ8å·ä½ç½®å°±ç©ºä¸‹äº†ï¼‰ã€‚
+  int16_t personDistribution[5][5];//æ¯ä¸ªè®­ç»ƒæœ‰å“ªäº›äººå¤´idï¼ŒpersonDistribution[å“ªä¸ªè®­ç»ƒ][ç¬¬å‡ ä¸ªäººå¤´]ï¼Œç©ºä½ç½®ä¸º-1
+  int lockedTrainingId;//æ˜¯å¦é”è®­ç»ƒï¼Œä»¥åŠé”åœ¨äº†å“ªä¸ªè®­ç»ƒã€‚å¯ä»¥å…ˆä¸åŠ ï¼Œç­‰aiåšå®Œäº†æœ‰æ—¶é—´å†åŠ ã€‚
 
 
-  //¿ÉÒÔÍ¨¹ıÉÏÃæµÄĞÅÏ¢¼ÆËã»ñµÃµÄ·Ç¶ÀÁ¢µÄĞÅÏ¢£¬Ã¿»ØºÏ¸üĞÂÒ»´Î£¬²»ĞèÒªÂ¼Èë
+  //å‰§æœ¬ç›¸å…³
+  int16_t uaf_trainingColor[5];//äº”ç§è®­ç»ƒçš„é¢œè‰²
+  int16_t uaf_trainingLevel[3][5];//ä¸‰ç§é¢œè‰²äº”ç§è®­ç»ƒçš„ç­‰çº§
+  bool uaf_winHistory[5][3][5];//è¿åŠ¨ä¼šå†å²æˆ˜ç»©
+  bool uaf_lastTurnNotTrain;//ä¸Šå›åˆæ˜¯å¦æ²¡æœ‰è®­ç»ƒï¼Ÿå¦‚æœæ²¡æœ‰ï¼Œè¿™å›åˆçš„ç­‰çº§å¢åŠ é‡+3
+  int16_t uaf_xiangtanRemain;//è¿˜å‰©å‡ æ¬¡ç›¸è°ˆ
 
-  int16_t uaf_trainLevelColorTotal[3];//ÈıÖÖÑÕÉ«µÄµÈ¼¶×ÜºÍ
-  int16_t uaf_colorWinCount[3];//ÈıÖÖÑÕÉ«·Ö±ğÀÛ¼Æwin¹ı¶àÉÙ´Î
-  int16_t uaf_trainingBonus;//¾ç±¾ÑµÁ·¼Ó³É£¨È¡¾öÓÚÈıÖÖÑÕÉ«µÄwinÊı£©£¬Ã¿°ëÄê¸üĞÂÒ»´Î
+  int16_t uaf_buffActivated[3];//è“çº¢é»„çš„buffå·²ç»è§¦å‘è¿‡å‡ æ¬¡äº†ï¼Ÿè®°å½•è¿™ä¸ªä¸»è¦æ˜¯ç”¨æ¥è¯†åˆ«ä»€ä¹ˆæ—¶å€™åº”è¯¥å¢åŠ ä¸¤å›åˆbuffï¼Œæ¯”å¦‚å‡å¦‚è®­ç»ƒåç­‰çº§å˜æˆ370ï¼Œè¿™æ—¶å¦‚æœbuffActivated=6åˆ™å¢åŠ 2å›åˆbuffå¹¶æ”¹æˆ7ï¼ˆè¯´æ˜åˆšæ¿€æ´»350çº§çš„buffï¼‰ï¼Œå¦‚æœbuffActivated=7åˆ™ä¸å¢åŠ buffï¼ˆè¯´æ˜350çº§çš„buffå·²ç»æ¿€æ´»è¿‡ï¼‰
+  int16_t uaf_buffNum[3];//è“çº¢é»„çš„buffè¿˜å‰©å‡ ä¸ªï¼Ÿ
 
-  int16_t trainValue[5][6];//ÑµÁ·ÊıÖµµÄ×ÜÊı£¨ÏÂ²ã+ÉÏ²ã£©£¬µÚÒ»¸öÊıÊÇµÚ¼¸¸öÑµÁ·£¬µÚ¶ş¸öÊıÒÀ´ÎÊÇËÙÄÍÁ¦¸ùÖÇpt
-  int16_t trainVitalChange[5];//ÑµÁ·ºóµÄÌåÁ¦±ä»¯£¨¸ºµÄÌåÁ¦ÏûºÄ£©
-  int16_t failRate[5];//ÑµÁ·Ê§°ÜÂÊ
-  int16_t uaf_trainLevelGain[5];//Îå¸öÑµÁ··Ö±ğ¼Ó¶àÉÙÑµÁ·µÈ¼¶£¨²»ÊÇ×ÜÊı£¬Ö»¿´µ±Ç°ÑµÁ·Í·¶¥µÄÊı×Ö£©,²»¿¼ÂÇ100¼¶Òç³ö
-  int16_t trainShiningNum[5];//Ã¿¸öÑµÁ·ÓĞ¼¸¸ö²ÊÈ¦
+  //å•ç‹¬å¤„ç†å‡‰èŠ±å¡ï¼Œå› ä¸ºæ¥è¿‘å¿…å¸¦ã€‚å…¶ä»–å‹äººå›¢é˜Ÿå¡çš„ä»¥åå†è€ƒè™‘
+  int16_t lianghua_type;//0æ²¡å¸¦å‡‰èŠ±å¡ï¼Œ1 ssrå¡ï¼Œ2 rå¡
+  int16_t lianghua_personId;//å‡‰èŠ±å¡åœ¨personsé‡Œçš„ç¼–å·
+  //int16_t lianghua_stage;//0æ˜¯æœªç‚¹å‡»ï¼Œ1æ˜¯å·²ç‚¹å‡»ä½†æœªè§£é”å‡ºè¡Œï¼Œ2æ˜¯å·²è§£é”å‡ºè¡Œ    è¿™æ¬¡ï¼Œå‡‰èŠ±å¡å’Œå…¶ä»–å‹äººçš„è¿™ä¸ªå…¨æ”¾åœ¨Personç±»é‡Œäº†
+  int16_t lianghua_outgoingUsed;//å‡‰èŠ±çš„å‡ºè¡Œå·²ç»èµ°äº†å‡ æ®µäº†   æš‚æ—¶ä¸è€ƒè™‘å…¶ä»–å‹äººå›¢é˜Ÿå¡çš„å‡ºè¡Œ
+  double lianghua_vitalBonus;//å‡‰èŠ±å¡çš„å›å¤é‡å€æ•°ï¼ˆæ»¡ç ´1.60ï¼‰
+  double lianghua_statusBonus;//å‡‰èŠ±å¡çš„äº‹ä»¶æ•ˆæœå€æ•°ï¼ˆæ»¡ç ´1.25ï¼‰
 
-  //ÑµÁ·ÊıÖµ¼ÆËãµÄÖĞ¼ä±äÁ¿£¬´æÏÂÀ´·½±ãÊÖĞ´Âß¼­¶ÔÏàÌ¸ºóÊôĞÔ½øĞĞ¹À¼Æ
-  bool uaf_haveLose;//uaf´ó»áÊÇ·ñÒÑ¾­Êä¹ı£¨Êä¹ıÒ»´Î¾Í²»ĞèÒª´ÕÈ«winÁË£¬×îºó±Ø¶¨ÉÙÈ«ÊôĞÔ25£©
-  bool uaf_haveLoseColor[3];//uaf´ó»áÃ¿ÖÖÑÕÉ«ÊÇ·ñÒÑ¾­Êä¹ı£¨Êä¹ıÒ»´ÎÕâÖÖÑÕÉ«¾Í²»ĞèÒª´ÕÈ«winÁË£¬ÑµÁ·¿÷¶¨ÁË£©
-  int16_t trainValueLower[5][6];//ÑµÁ·ÊıÖµµÄÏÂ²ã£¬µÚÒ»¸öÊıÊÇµÚ¼¸¸öÑµÁ·£¬µÚ¶ş¸öÊıÒÀ´ÎÊÇËÙÄÍÁ¦¸ùÖÇptÌåÁ¦
-  double trainValueCardMultiplier[5];//Ö§Ô®¿¨³ËÇø=(1+×ÜÑµÁ·¼Ó³É)(1+¸É¾¢ÏµÊı*(1+×Ü¸É¾¢¼Ó³É))(1+0.05*×Ü¿¨Êı)(1+ÓÑÇé1)(1+ÓÑÇé2)...
+  bool lianghua_guyouEffective;//å‡‰èŠ±å›ºæœ‰æ˜¯å¦ç”Ÿæ•ˆï¼Œæ¯æ¬¡randomDistributeCardsçš„æ—¶å€™æ£€æŸ¥è¿™ä¸ªï¼Œå¦‚æœssrå‡‰èŠ±ç¾ç»Šå¤§äºç­‰äº60ä¸”lianghua_guyouEffective=falseï¼Œåˆ™è®¾ä¸ºtrueå¹¶é‡ç½®Person.distribution
 
-  bool cardEffectCalculated;//Ö§Ô®¿¨Ğ§¹ûÊÇ·ñÒÑ¾­¼ÆËã¹ı£¿ÏàÌ¸ºó²»ĞèÒªÖØĞÂ¼ÆËã£¬·ÖÅä¿¨×é»òÕß¶ÁjsonÊ±ĞèÒªÖÃÎªfalse
+
+  //å¯ä»¥é€šè¿‡ä¸Šé¢çš„ä¿¡æ¯è®¡ç®—è·å¾—çš„éç‹¬ç«‹çš„ä¿¡æ¯ï¼Œæ¯å›åˆæ›´æ–°ä¸€æ¬¡ï¼Œä¸éœ€è¦å½•å…¥
+
+  int16_t uaf_trainLevelColorTotal[3];//ä¸‰ç§é¢œè‰²çš„ç­‰çº§æ€»å’Œ
+  int16_t uaf_colorWinCount[3];//ä¸‰ç§é¢œè‰²åˆ†åˆ«ç´¯è®¡winè¿‡å¤šå°‘æ¬¡
+  int16_t uaf_trainingBonus;//å‰§æœ¬è®­ç»ƒåŠ æˆï¼ˆå–å†³äºä¸‰ç§é¢œè‰²çš„winæ•°ï¼‰ï¼Œæ¯åŠå¹´æ›´æ–°ä¸€æ¬¡
+
+  int16_t trainValue[5][6];//è®­ç»ƒæ•°å€¼çš„æ€»æ•°ï¼ˆä¸‹å±‚+ä¸Šå±‚ï¼‰ï¼Œç¬¬ä¸€ä¸ªæ•°æ˜¯ç¬¬å‡ ä¸ªè®­ç»ƒï¼Œç¬¬äºŒä¸ªæ•°ä¾æ¬¡æ˜¯é€Ÿè€åŠ›æ ¹æ™ºpt
+  int16_t trainVitalChange[5];//è®­ç»ƒåçš„ä½“åŠ›å˜åŒ–ï¼ˆè´Ÿçš„ä½“åŠ›æ¶ˆè€—ï¼‰
+  int16_t failRate[5];//è®­ç»ƒå¤±è´¥ç‡
+  int16_t uaf_trainLevelGain[5];//äº”ä¸ªè®­ç»ƒåˆ†åˆ«åŠ å¤šå°‘è®­ç»ƒç­‰çº§ï¼ˆä¸æ˜¯æ€»æ•°ï¼Œåªçœ‹å½“å‰è®­ç»ƒå¤´é¡¶çš„æ•°å­—ï¼‰,ä¸è€ƒè™‘100çº§æº¢å‡º
+  int16_t trainShiningNum[5];//æ¯ä¸ªè®­ç»ƒæœ‰å‡ ä¸ªå½©åœˆ
+
+  //è®­ç»ƒæ•°å€¼è®¡ç®—çš„ä¸­é—´å˜é‡ï¼Œå­˜ä¸‹æ¥æ–¹ä¾¿æ‰‹å†™é€»è¾‘å¯¹ç›¸è°ˆåå±æ€§è¿›è¡Œä¼°è®¡
+  bool uaf_haveLose;//uafå¤§ä¼šæ˜¯å¦å·²ç»è¾“è¿‡ï¼ˆè¾“è¿‡ä¸€æ¬¡å°±ä¸éœ€è¦å‡‘å…¨winäº†ï¼Œæœ€åå¿…å®šå°‘å…¨å±æ€§25ï¼‰
+  bool uaf_haveLoseColor[3];//uafå¤§ä¼šæ¯ç§é¢œè‰²æ˜¯å¦å·²ç»è¾“è¿‡ï¼ˆè¾“è¿‡ä¸€æ¬¡è¿™ç§é¢œè‰²å°±ä¸éœ€è¦å‡‘å…¨winäº†ï¼Œè®­ç»ƒäºå®šäº†ï¼‰
+  int16_t trainValueLower[5][6];//è®­ç»ƒæ•°å€¼çš„ä¸‹å±‚ï¼Œç¬¬ä¸€ä¸ªæ•°æ˜¯ç¬¬å‡ ä¸ªè®­ç»ƒï¼Œç¬¬äºŒä¸ªæ•°ä¾æ¬¡æ˜¯é€Ÿè€åŠ›æ ¹æ™ºptä½“åŠ›
+  double trainValueCardMultiplier[5];//æ”¯æ´å¡ä¹˜åŒº=(1+æ€»è®­ç»ƒåŠ æˆ)(1+å¹²åŠ²ç³»æ•°*(1+æ€»å¹²åŠ²åŠ æˆ))(1+0.05*æ€»å¡æ•°)(1+å‹æƒ…1)(1+å‹æƒ…2)...
+
+  bool cardEffectCalculated;//æ”¯æ´å¡æ•ˆæœæ˜¯å¦å·²ç»è®¡ç®—è¿‡ï¼Ÿç›¸è°ˆåä¸éœ€è¦é‡æ–°è®¡ç®—ï¼Œåˆ†é…å¡ç»„æˆ–è€…è¯»jsonæ—¶éœ€è¦ç½®ä¸ºfalse
   CardTrainingEffect cardEffects[6];
 
 
 
 
-  //ÓÎÏ·Á÷³ÌÏà¹Ø------------------------------------------------------------------------------------------
+  //æ¸¸æˆæµç¨‹ç›¸å…³------------------------------------------------------------------------------------------
 
 public:
 
@@ -102,92 +102,92 @@ public:
     int umaStars,
     int newCards[6],
     int newZhongMaBlueCount[5],
-    int newZhongMaExtraBonus[6]);//ÖØÖÃÓÎÏ·£¬¿ª¾Ö¡£umaIdÊÇÂíÄï±àºÅ
+    int newZhongMaExtraBonus[6]);//é‡ç½®æ¸¸æˆï¼Œå¼€å±€ã€‚umaIdæ˜¯é©¬å¨˜ç¼–å·
 
 
-  //Õâ¸ö²Ù×÷ÊÇ·ñÔÊĞíÇÒºÏÀí
-  //²»ÔÊĞíµÄ°üÀ¨£º±¾´ÎĞèÒªÏàÌ¸´ÎÊı´óÓÚÊ£ÓàÏàÌ¸´ÎÊı£¬ÔÚÇ°Ê®¼¸¸öÒÔ¼°uraÆÚ¼äµÄÈı¸ö»ØºÏ±ÈÈü¡£
-  //²»ºÏÀíµÄ°üÀ¨£ºÏàÌ¸ÁË²»ÑµÁ·£¬°Ñ²»´æÔÚµÄÑÕÉ«ÏàÌ¸³ÉÆäËûÑÕÉ«£¬Ñ¡ÔñµÄÑµÁ·²»ÊÇÏàÌ¸µÄÔ­É«ºÍÄ¿±êÉ«
+  //è¿™ä¸ªæ“ä½œæ˜¯å¦å…è®¸ä¸”åˆç†
+  //ä¸å…è®¸çš„åŒ…æ‹¬ï¼šæœ¬æ¬¡éœ€è¦ç›¸è°ˆæ¬¡æ•°å¤§äºå‰©ä½™ç›¸è°ˆæ¬¡æ•°ï¼Œåœ¨å‰åå‡ ä¸ªä»¥åŠuraæœŸé—´çš„ä¸‰ä¸ªå›åˆæ¯”èµ›ã€‚
+  //ä¸åˆç†çš„åŒ…æ‹¬ï¼šç›¸è°ˆäº†ä¸è®­ç»ƒï¼ŒæŠŠä¸å­˜åœ¨çš„é¢œè‰²ç›¸è°ˆæˆå…¶ä»–é¢œè‰²ï¼Œé€‰æ‹©çš„è®­ç»ƒä¸æ˜¯ç›¸è°ˆçš„åŸè‰²å’Œç›®æ ‡è‰²
   bool isLegal(Action action) const;
 
-  //½øĞĞActionºóÒ»Ö±Íùºó½øĞĞ£¬Ö±µ½ÏÂÒ»´ÎĞèÒªÍæ¼Ò¾ö²ß£¨Ìø¹ı±ÈÈü»ØºÏ£©¡£Èç¹û»ØºÏÊı>=78ÔòÊ²Ã´¶¼²»×öÖ±½Óreturn£¨µ«²»Òª±¨´í»òÕßÉÁÍË£©
+  //è¿›è¡ŒActionåä¸€ç›´å¾€åè¿›è¡Œï¼Œç›´åˆ°ä¸‹ä¸€æ¬¡éœ€è¦ç©å®¶å†³ç­–ï¼ˆè·³è¿‡æ¯”èµ›å›åˆï¼‰ã€‚å¦‚æœå›åˆæ•°>=78åˆ™ä»€ä¹ˆéƒ½ä¸åšç›´æ¥returnï¼ˆä½†ä¸è¦æŠ¥é”™æˆ–è€…é—ªé€€ï¼‰
   void applyTrainingAndNextTurn(
     std::mt19937_64& rand,
     Action action);
 
-  int finalScore() const;//×îÖÕ×Ü·Ö
-  bool isEnd() const;//ÊÇ·ñÒÑ¾­ÖÕ¾Ö
+  int finalScore() const;//æœ€ç»ˆæ€»åˆ†
+  bool isEnd() const;//æ˜¯å¦å·²ç»ç»ˆå±€
 
 
 
-  //Ô­ÔòÉÏÕâ¼¸¸öprivate¾ÍĞĞ£¬Èç¹ûprivateÔÚÄ³Ğ©µØ·½·Ç³£²»·½±ãÄÇ¾Í¸Ä³Épublic
-  void randomDistributeCards(std::mt19937_64& rand);//Ëæ»ú·ÖÅäÈËÍ·
-  void calculateTrainingValue();//¼ÆËãËùÓĞÑµÁ··Ö±ğ¼Ó¶àÉÙ£¬²¢¼ÆËãÊ§°ÜÂÊ¡¢ÑµÁ·µÈ¼¶ÌáÉıµÈ
-  bool applyTraining(std::mt19937_64& rand, Action action);//´¦Àí ÑµÁ·/³öĞĞ/±ÈÈü ±¾Éí£¬°üÀ¨ÓÑÈËµã»÷ÊÂ¼ş£¬²»°üÀ¨¹Ì¶¨ÊÂ¼şºÍ¾ç±¾ÊÂ¼ş¡£Èç¹û²»ºÏ·¨£¬Ôò·µ»Øfalse£¬ÇÒ±£Ö¤²»×öÈÎºÎĞŞ¸Ä
-  void checkEventAfterTrain(std::mt19937_64& rand);//¼ì²é¹Ì¶¨ÊÂ¼şºÍËæ»úÊÂ¼ş£¬²¢½øÈëÏÂÒ»¸ö»ØºÏ
+  //åŸåˆ™ä¸Šè¿™å‡ ä¸ªprivateå°±è¡Œï¼Œå¦‚æœprivateåœ¨æŸäº›åœ°æ–¹éå¸¸ä¸æ–¹ä¾¿é‚£å°±æ”¹æˆpublic
+  void randomDistributeCards(std::mt19937_64& rand);//éšæœºåˆ†é…äººå¤´
+  void calculateTrainingValue();//è®¡ç®—æ‰€æœ‰è®­ç»ƒåˆ†åˆ«åŠ å¤šå°‘ï¼Œå¹¶è®¡ç®—å¤±è´¥ç‡ã€è®­ç»ƒç­‰çº§æå‡ç­‰
+  bool applyTraining(std::mt19937_64& rand, Action action);//å¤„ç† è®­ç»ƒ/å‡ºè¡Œ/æ¯”èµ› æœ¬èº«ï¼ŒåŒ…æ‹¬å‹äººç‚¹å‡»äº‹ä»¶ï¼Œä¸åŒ…æ‹¬å›ºå®šäº‹ä»¶å’Œå‰§æœ¬äº‹ä»¶ã€‚å¦‚æœä¸åˆæ³•ï¼Œåˆ™è¿”å›falseï¼Œä¸”ä¿è¯ä¸åšä»»ä½•ä¿®æ”¹
+  void checkEventAfterTrain(std::mt19937_64& rand);//æ£€æŸ¥å›ºå®šäº‹ä»¶å’Œéšæœºäº‹ä»¶ï¼Œå¹¶è¿›å…¥ä¸‹ä¸€ä¸ªå›åˆ
 
-  void checkFixedEvents(std::mt19937_64& rand);//Ã¿»ØºÏµÄ¹Ì¶¨ÊÂ¼ş£¬°üÀ¨¾ç±¾ÊÂ¼şºÍ¹Ì¶¨±ÈÈüºÍ²¿·ÖÂíÄïÊÂ¼şµÈ
-  void checkRandomEvents(std::mt19937_64& rand);//Ä£ÄâÖ§Ô®¿¨ÊÂ¼şºÍËæ»úÂíÄïÊÂ¼ş£¨Ëæ»ú¼Óî¿°í£¬ÌåÁ¦£¬ĞÄÇé£¬µôĞÄÇéµÈ£©
+  void checkFixedEvents(std::mt19937_64& rand);//æ¯å›åˆçš„å›ºå®šäº‹ä»¶ï¼ŒåŒ…æ‹¬å‰§æœ¬äº‹ä»¶å’Œå›ºå®šæ¯”èµ›å’Œéƒ¨åˆ†é©¬å¨˜äº‹ä»¶ç­‰
+  void checkRandomEvents(std::mt19937_64& rand);//æ¨¡æ‹Ÿæ”¯æ´å¡äº‹ä»¶å’Œéšæœºé©¬å¨˜äº‹ä»¶ï¼ˆéšæœºåŠ ç¾ç»Šï¼Œä½“åŠ›ï¼Œå¿ƒæƒ…ï¼Œæ‰å¿ƒæƒ…ç­‰ï¼‰
 
-  //³£ÓÃ½Ó¿Ú-----------------------------------------------------------------------------------------------
+  //å¸¸ç”¨æ¥å£-----------------------------------------------------------------------------------------------
 
   bool loadGameFromJson(std::string jsonStr);
 
-  //Éñ¾­ÍøÂçÊäÈë£¬³õ°æ²»ĞèÒªÊµÏÖ
+  //ç¥ç»ç½‘ç»œè¾“å…¥ï¼Œåˆç‰ˆä¸éœ€è¦å®ç°
   void getNNInputV1(float* buf, const SearchParam& param) const;
 
-  void print() const;//ÓÃ²ÊÉ«×ÖÌåÏÔÊ¾ÓÎÏ·ÄÚÈİ
-  void printFinalStats() const;//ÏÔÊ¾×îÖÕ½á¹û
+  void print() const;//ç”¨å½©è‰²å­—ä½“æ˜¾ç¤ºæ¸¸æˆå†…å®¹
+  void printFinalStats() const;//æ˜¾ç¤ºæœ€ç»ˆç»“æœ
 
 
 
 
-  //¸÷ÖÖ¸¨Öúº¯ÊıÓë½Ó¿Ú£¬¿ÉÒÔ¸ù¾İĞèÒªÔö¼Ó»òÕßÉ¾¼õ-------------------------------------------------------------------------------
-  static inline int convertTrainingLevel(int x) //×ª»»ºóµÄÑµÁ·µÈ¼¶´Ó0¿ªÊ¼£¬0ÊÇlv1£¬4ÊÇlv5
+  //å„ç§è¾…åŠ©å‡½æ•°ä¸æ¥å£ï¼Œå¯ä»¥æ ¹æ®éœ€è¦å¢åŠ æˆ–è€…åˆ å‡-------------------------------------------------------------------------------
+  static inline int convertTrainingLevel(int x) //è½¬æ¢åçš„è®­ç»ƒç­‰çº§ä»0å¼€å§‹ï¼Œ0æ˜¯lv1ï¼Œ4æ˜¯lv5
   {
     return x < 20 ? 0 : x < 30 ? 1 : x < 40 ? 2 : x < 50 ? 3 : 4;
   }
-  inline bool isXiahesu() const //ÊÇ·ñÎªÏÄºÏËŞ
+  inline bool isXiahesu() const //æ˜¯å¦ä¸ºå¤åˆå®¿
   {
     return (turn >= 36 && turn <= 39) || (turn >= 60 && turn <= 63);
   }
-  int uaf_competitionFinishedNum() const;//ÒÑ¾­¼¸´Îuaf´ó»áÁË
-  bool isXiangtanLegal(int x) const;//´ËÏàÌ¸ÊÇ·ñºÏ·¨ÇÒÓĞÒâÒå
-  void xiangtanAndRecalculate(int x, bool forHandwrittenLogic);//ÏàÌ¸£¬²¢ÖØĞÂ¼ÆËãÊôĞÔÖµ£¬Èç¹ûforHandwrittenLogicÔòÊÇ¸øÊÖĞ´Âß¼­ÓÃµÄ£¬¿ÉÒÔÂÔÎ¢²»×¼È·
-  void runRace(int basicFiveStatusBonus, int basicPtBonus);//°Ñ±ÈÈü½±Àø¼Óµ½ÊôĞÔºÍptÉÏ£¬ÊäÈëÊÇ²»¼ÆÈüºó¼Ó³ÉµÄ»ù´¡Öµ
+  int uaf_competitionFinishedNum() const;//å·²ç»å‡ æ¬¡uafå¤§ä¼šäº†
+  bool isXiangtanLegal(int x) const;//æ­¤ç›¸è°ˆæ˜¯å¦åˆæ³•ä¸”æœ‰æ„ä¹‰
+  void xiangtanAndRecalculate(int x, bool forHandwrittenLogic);//ç›¸è°ˆï¼Œå¹¶é‡æ–°è®¡ç®—å±æ€§å€¼ï¼Œå¦‚æœforHandwrittenLogicåˆ™æ˜¯ç»™æ‰‹å†™é€»è¾‘ç”¨çš„ï¼Œå¯ä»¥ç•¥å¾®ä¸å‡†ç¡®
+  void runRace(int basicFiveStatusBonus, int basicPtBonus);//æŠŠæ¯”èµ›å¥–åŠ±åŠ åˆ°å±æ€§å’Œptä¸Šï¼Œè¾“å…¥æ˜¯ä¸è®¡èµ›ååŠ æˆçš„åŸºç¡€å€¼
 
 
-  int calculateRealStatusGain(int idx, int value) const;//¿¼ÂÇ1200ÒÔÉÏÎª2µÄ±¶ÊıµÄÊµ¼ÊÊôĞÔÔö¼ÓÖµ
+  int calculateRealStatusGain(int idx, int value) const;//è€ƒè™‘1200ä»¥ä¸Šä¸º2çš„å€æ•°çš„å®é™…å±æ€§å¢åŠ å€¼
 
-  void addStatus(int idx, int value);//Ôö¼ÓÊôĞÔÖµ£¬²¢´¦ÀíÒç³ö
-  void addAllStatus(int value);//Í¬Ê±Ôö¼ÓÎå¸öÊôĞÔÖµ
-  void addVital(int value);//Ôö¼Ó»ò¼õÉÙÌåÁ¦£¬²¢´¦ÀíÒç³ö
-  void addMotivation(int value);//Ôö¼Ó»ò¼õÉÙĞÄÇé£¬Í¬Ê±¿¼ÂÇ¡°isPositiveThinking¡±
-  void addJiBan(int idx,int value);//Ôö¼Óî¿°í£¬²¢¿¼ÂÇ°®½¿
+  void addStatus(int idx, int value);//å¢åŠ å±æ€§å€¼ï¼Œå¹¶å¤„ç†æº¢å‡º
+  void addAllStatus(int value);//åŒæ—¶å¢åŠ äº”ä¸ªå±æ€§å€¼
+  void addVital(int value);//å¢åŠ æˆ–å‡å°‘ä½“åŠ›ï¼Œå¹¶å¤„ç†æº¢å‡º
+  void addMotivation(int value);//å¢åŠ æˆ–å‡å°‘å¿ƒæƒ…ï¼ŒåŒæ—¶è€ƒè™‘â€œisPositiveThinkingâ€
+  void addJiBan(int idx,int value);//å¢åŠ ç¾ç»Šï¼Œå¹¶è€ƒè™‘çˆ±å¨‡
 
-  void addStatusFriend(int idx, int value);//ÓÑÈË¿¨ÊÂ¼ş£¬Ôö¼ÓÊôĞÔÖµ»òÕßpt£¨idx=5£©£¬¿¼ÂÇÊÂ¼ş¼Ó³É
-  void addVitalFriend(int value);//ÓÑÈË¿¨ÊÂ¼ş£¬Ôö¼ÓÌåÁ¦£¬¿¼ÂÇ»Ø¸´Á¿¼Ó³É
+  void addStatusFriend(int idx, int value);//å‹äººå¡äº‹ä»¶ï¼Œå¢åŠ å±æ€§å€¼æˆ–è€…ptï¼ˆidx=5ï¼‰ï¼Œè€ƒè™‘äº‹ä»¶åŠ æˆ
+  void addVitalFriend(int value);//å‹äººå¡äº‹ä»¶ï¼Œå¢åŠ ä½“åŠ›ï¼Œè€ƒè™‘å›å¤é‡åŠ æˆ
 
-  void uaf_checkNewBuffAfterLevelGain();//ÑµÁ·»òÕßÓÑÈË³öĞĞºó£¬¼ì²éÊÇ·ñÓĞĞÂµÄÀ¶ºì»Æbuff
-  void uaf_runCompetition(int n);//µÚn´Îuaf´ó»á
+  void uaf_checkNewBuffAfterLevelGain();//è®­ç»ƒæˆ–è€…å‹äººå‡ºè¡Œåï¼Œæ£€æŸ¥æ˜¯å¦æœ‰æ–°çš„è“çº¢é»„buff
+  void uaf_runCompetition(int n);//ç¬¬næ¬¡uafå¤§ä¼š
 
-  float getSkillScore() const;//¼¼ÄÜ·Ö£¬ÊäÈëÉñ¾­ÍøÂçÖ®Ç°Ò²¿ÉÄÜÌáÇ°¼õÈ¥
-  int getTrainingLevel(int trainIdx) const;//¼ÆËãÑµÁ·µÈ¼¶£¬1~19,20~21,...50~100
-  bool isCardShining(int personIdx, int trainIdx) const;    // ÅĞ¶ÏÖ¸¶¨¿¨ÊÇ·ñÉÁ²Ê¡£ÆÕÍ¨¿¨¿´î¿°íÓëËùÔÚÑµÁ·£¬ÍÅ¶Ó¿¨¿´friendOrGroupCardStage
-  //bool trainShiningCount(int trainIdx) const;    // Ö¸¶¨ÑµÁ·²ÊÈ¦Êı //uaf²»Ò»¶¨ÓĞÓÃ
-  int calculateFailureRate(int trainType, double failRateMultiply) const;//¼ÆËãÑµÁ·Ê§°ÜÂÊ£¬failRateMultiplyÊÇÑµÁ·Ê§°ÜÂÊ³ËÊı=(1-Ö§Ô®¿¨1µÄÊ§°ÜÂÊÏÂ½µ)*(1-Ö§Ô®¿¨2µÄÊ§°ÜÂÊÏÂ½µ)*...
-  //void calculateTrainingValueSingle(int trainType);//¼ÆËãÃ¿¸öÑµÁ·¼Ó¶àÉÙ   uaf¾ç±¾¿ÉÄÜÎå¸öÑµÁ·Ò»ÆğËã±È½Ï·½±ã
+  float getSkillScore() const;//æŠ€èƒ½åˆ†ï¼Œè¾“å…¥ç¥ç»ç½‘ç»œä¹‹å‰ä¹Ÿå¯èƒ½æå‰å‡å»
+  int getTrainingLevel(int trainIdx) const;//è®¡ç®—è®­ç»ƒç­‰çº§ï¼Œ1~19,20~21,...50~100
+  bool isCardShining(int personIdx, int trainIdx) const;    // åˆ¤æ–­æŒ‡å®šå¡æ˜¯å¦é—ªå½©ã€‚æ™®é€šå¡çœ‹ç¾ç»Šä¸æ‰€åœ¨è®­ç»ƒï¼Œå›¢é˜Ÿå¡çœ‹friendOrGroupCardStage
+  //bool trainShiningCount(int trainIdx) const;    // æŒ‡å®šè®­ç»ƒå½©åœˆæ•° //uafä¸ä¸€å®šæœ‰ç”¨
+  int calculateFailureRate(int trainType, double failRateMultiply) const;//è®¡ç®—è®­ç»ƒå¤±è´¥ç‡ï¼ŒfailRateMultiplyæ˜¯è®­ç»ƒå¤±è´¥ç‡ä¹˜æ•°=(1-æ”¯æ´å¡1çš„å¤±è´¥ç‡ä¸‹é™)*(1-æ”¯æ´å¡2çš„å¤±è´¥ç‡ä¸‹é™)*...
+  //void calculateTrainingValueSingle(int trainType);//è®¡ç®—æ¯ä¸ªè®­ç»ƒåŠ å¤šå°‘   uafå‰§æœ¬å¯èƒ½äº”ä¸ªè®­ç»ƒä¸€èµ·ç®—æ¯”è¾ƒæ–¹ä¾¿
 
 
-  //ÓÑÈË¿¨Ïà¹ØÊÂ¼ş
-  void handleFriendUnlock(std::mt19937_64& rand);//ÓÑÈËÍâ³ö½âËø
-  void handleFriendOutgoing(std::mt19937_64& rand);//ÓÑÈËÍâ³ö
-  void handleFriendClickEvent(std::mt19937_64& rand, int atTrain);//ÓÑÈËÊÂ¼ş£¨¤ªÆ£¤ì˜”£©
-  void handleFriendFixedEvent();//ÓÑÈË¹Ì¶¨ÊÂ¼ş£¬°İÄê+½áËã
-  void checkLianghuaGuyou();//¶ÁÈëjson»òÃ¿´ÎrandomDistributeCardsµÄÊ±ºò¼ì²éÕâ¸ö£¬Èç¹ûssrÁ¹»¨î¿°í´óÓÚµÈÓÚ60ÇÒlianghua_guyouEffective=false£¬ÔòÉèÎªtrue²¢ÖØĞÂ¹¹ÔìPerson.distributionÊ¹µÃÁ¹»¨¹ÌÓĞÉúĞ§
+  //å‹äººå¡ç›¸å…³äº‹ä»¶
+  void handleFriendUnlock(std::mt19937_64& rand);//å‹äººå¤–å‡ºè§£é”
+  void handleFriendOutgoing(std::mt19937_64& rand);//å‹äººå¤–å‡º
+  void handleFriendClickEvent(std::mt19937_64& rand, int atTrain);//å‹äººäº‹ä»¶ï¼ˆãŠç–²ã‚Œæ§˜ï¼‰
+  void handleFriendFixedEvent();//å‹äººå›ºå®šäº‹ä»¶ï¼Œæ‹œå¹´+ç»“ç®—
+  void checkLianghuaGuyou();//è¯»å…¥jsonæˆ–æ¯æ¬¡randomDistributeCardsçš„æ—¶å€™æ£€æŸ¥è¿™ä¸ªï¼Œå¦‚æœssrå‡‰èŠ±ç¾ç»Šå¤§äºç­‰äº60ä¸”lianghua_guyouEffective=falseï¼Œåˆ™è®¾ä¸ºtrueå¹¶é‡æ–°æ„é€ Person.distributionä½¿å¾—å‡‰èŠ±å›ºæœ‰ç”Ÿæ•ˆ
 
-  //ÏÔÊ¾ÊÂ¼ş
-  void printEvents(std::string s) const;//ÓÃÂÌÉ«×ÖÌåÏÔÊ¾ÊÂ¼ş
+  //æ˜¾ç¤ºäº‹ä»¶
+  void printEvents(std::string s) const;//ç”¨ç»¿è‰²å­—ä½“æ˜¾ç¤ºäº‹ä»¶
 
 };
 

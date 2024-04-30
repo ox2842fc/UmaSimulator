@@ -7,7 +7,7 @@ static bool randBool(mt19937_64& rand, double p)
   return rand() % 65536 < p * 65536;
 }
 
-//¾¡Á¿ÓëGameÀàµÄË³ĞòÒ»ÖÂ
+//å°½é‡ä¸Gameç±»çš„é¡ºåºä¸€è‡´
 void Game::newGame(mt19937_64& rand, bool enablePlayerPrint, int newUmaId, int umaStars, int newCards[6], int newZhongMaBlueCount[5], int newZhongMaExtraBonus[6])
 {
   playerPrint = enablePlayerPrint;
@@ -16,7 +16,7 @@ void Game::newGame(mt19937_64& rand, bool enablePlayerPrint, int newUmaId, int u
   isLinkUma = GameConstants::isLinkChara(umaId);
   for (int i = 0; i < TOTAL_TURN; i++)
     isRacingTurn[i] = GameDatabase::AllUmas[umaId].races[i] == TURN_RACE;
-  assert(isRacingTurn[11] == true);//³öµÀÈü
+  assert(isRacingTurn[11] == true);//å‡ºé“èµ›
   isRacingTurn[TOTAL_TURN - 5] = true;//ura1
   isRacingTurn[TOTAL_TURN - 3] = true;//ura2
   isRacingTurn[TOTAL_TURN - 1] = true;//ura3
@@ -30,12 +30,12 @@ void Game::newGame(mt19937_64& rand, bool enablePlayerPrint, int newUmaId, int u
   motivation = 3;
 
   for (int i = 0; i < 5; i++)
-    fiveStatus[i] = GameDatabase::AllUmas[umaId].fiveStatusInitial[i] - 10 * (5 - umaStars); //ÈüÂíÄï³õÊ¼Öµ
+    fiveStatus[i] = GameDatabase::AllUmas[umaId].fiveStatusInitial[i] - 10 * (5 - umaStars); //èµ›é©¬å¨˜åˆå§‹å€¼
   for (int i = 0; i < 5; i++)
-    fiveStatusLimit[i] = GameConstants::BasicFiveStatusLimit[i]; //Ô­Ê¼ÊôĞÔÉÏÏŞ
+    fiveStatusLimit[i] = GameConstants::BasicFiveStatusLimit[i]; //åŸå§‹å±æ€§ä¸Šé™
 
   skillPt = 120;
-  skillScore = umaStars >= 3 ? 170 * (umaStars - 2) : 120 * (umaStars);//¹ÌÓĞ¼¼ÄÜ
+  skillScore = umaStars >= 3 ? 170 * (umaStars - 2) : 120 * (umaStars);//å›ºæœ‰æŠ€èƒ½
   ptScoreRate = GameConstants::ScorePtRate;
 
   failureRateBias = 0;
@@ -48,9 +48,9 @@ void Game::newGame(mt19937_64& rand, bool enablePlayerPrint, int newUmaId, int u
     zhongMaExtraBonus[i] = newZhongMaExtraBonus[i];
 
   for (int i = 0; i < 5; i++)
-    fiveStatusLimit[i] += int(zhongMaBlueCount[i] * 5.34 * 2); //ÊôĞÔÉÏÏŞ--ÖÖÂí»ù´¡Öµ
+    fiveStatusLimit[i] += int(zhongMaBlueCount[i] * 5.34 * 2); //å±æ€§ä¸Šé™--ç§é©¬åŸºç¡€å€¼
   for (int i = 0; i < 5; i++)
-    addStatus(i, zhongMaBlueCount[i] * 7); //ÖÖÂí
+    addStatus(i, zhongMaBlueCount[i] * 7); //ç§é©¬
 
   isRacing = false;
 
@@ -92,11 +92,11 @@ void Game::newGame(mt19937_64& rand, bool enablePlayerPrint, int newUmaId, int u
         lianghua_statusBonus = GameConstants::FriendStatusBonusR[friendLevel];
       }
       lianghua_vitalBonus += 1e-10;
-      lianghua_statusBonus += 1e-10;//¼Ó¸öĞ¡Á¿£¬±ÜÃâÒòÎªÉáÈëÎó²î¶øËã´í
+      lianghua_statusBonus += 1e-10;//åŠ ä¸ªå°é‡ï¼Œé¿å…å› ä¸ºèˆå…¥è¯¯å·®è€Œç®—é”™
     }
   }
 
-  for (int i = 0; i < 6; i++)//Ö§Ô®¿¨³õÊ¼¼Ó³É
+  for (int i = 0; i < 6; i++)//æ”¯æ´å¡åˆå§‹åŠ æˆ
   {
     for (int j = 0; j < 5; j++)
       addStatus(j, persons[i].cardParam.initialBonus[j]);
@@ -139,9 +139,9 @@ void Game::randomDistributeCards(std::mt19937_64& rand)
   cardEffectCalculated = false;
   checkLianghuaGuyou();
 
-  //±ÈÈü»ØºÏµÄÈËÍ··ÖÅä£¬²»ĞèÒªÖÃÁã£¬ÒòÎª²»ÊäÈëÉñ¾­ÍøÂç
+  //æ¯”èµ›å›åˆçš„äººå¤´åˆ†é…ï¼Œä¸éœ€è¦ç½®é›¶ï¼Œå› ä¸ºä¸è¾“å…¥ç¥ç»ç½‘ç»œ
   if (isRacing)
-    return;//±ÈÈü²»ÓÃ·ÖÅä¿¨×é
+    return;//æ¯”èµ›ä¸ç”¨åˆ†é…å¡ç»„
   
   for (int i = 0; i < 5; i++)
     for (int j = 0; j < 5; j++)
@@ -151,11 +151,11 @@ void Game::randomDistributeCards(std::mt19937_64& rand)
   vector<int8_t> buckets[5];
   for (int i = 0; i < 5; i++)
     buckets[i].clear();
-  //ÏÈ·ÅÓÑÈË/ÀíÊÂ³¤/¼ÇÕß
+  //å…ˆæ”¾å‹äºº/ç†äº‹é•¿/è®°è€…
   for (int i = 0; i < MAX_HEAD_NUM; i++)
   {
     Person& p = persons[i];
-    if (p.personType == PersonType_jizhe && turn <= 12)//¼ÇÕßµÚ13»ØºÏÀ´
+    if (p.personType == PersonType_jizhe && turn <= 12)//è®°è€…ç¬¬13å›åˆæ¥
       continue;
     if (p.personType == PersonType_lianghuaCard ||
       p.personType == PersonType_otherFriend ||
@@ -178,7 +178,7 @@ void Game::randomDistributeCards(std::mt19937_64& rand)
       personDistribution[i][0] = buckets[i][0];
       headN[i] += 1;
     }
-    else if (buckets[i].size() > 1)//Ëæ»úÑ¡Ò»¸öÈËÍ·
+    else if (buckets[i].size() > 1)//éšæœºé€‰ä¸€ä¸ªäººå¤´
     {
       personDistribution[i][0] = buckets[i][rand() % buckets[i].size()];
       headN[i] += 1;
@@ -186,7 +186,7 @@ void Game::randomDistributeCards(std::mt19937_64& rand)
     buckets[i].clear();
   }
 
-  //È»ºóÊÇÆÕÍ¨Ö§Ô®¿¨/npc(Èç¹ûÓĞ)
+  //ç„¶åæ˜¯æ™®é€šæ”¯æ´å¡/npc(å¦‚æœæœ‰)
   for (int i = 0; i < MAX_HEAD_NUM; i++)
   {
     Person& p = persons[i];
@@ -211,7 +211,7 @@ void Game::randomDistributeCards(std::mt19937_64& rand)
         headN[i] += 1;
       }
     }
-    else//×ÜÈËÊı³¬¹ı5ÁË£¬Ëæ»úÑ¡maxHead¸ö
+    else//æ€»äººæ•°è¶…è¿‡5äº†ï¼Œéšæœºé€‰maxHeadä¸ª
     {
       for (int j = 0; j < maxHead; j++)
       {
@@ -238,7 +238,7 @@ void Game::randomDistributeCards(std::mt19937_64& rand)
     }
   }
 
-  //ÊÇ·ñÓĞhint
+  //æ˜¯å¦æœ‰hint
   for (int i = 0; i < 6; i++)
     persons[i].isHint = false;
 
@@ -251,7 +251,7 @@ void Game::randomDistributeCards(std::mt19937_64& rand)
 
       if (persons[pid].personType == PersonType_card)
       {
-        if (uaf_buffNum[2] > 0)//»Æbuff
+        if (uaf_buffNum[2] > 0)//é»„buff
           persons[pid].isHint = true;
         else
         {
@@ -262,31 +262,31 @@ void Game::randomDistributeCards(std::mt19937_64& rand)
     }
   }
 
-  //Ëæ»úÑÕÉ«
+  //éšæœºé¢œè‰²
   for (int i = 0; i < 5; i++)
     uaf_trainingColor[i] = rand() % 3;
 
   calculateTrainingValue();
 }
 
-//Ğ¡Ğ´ÎªÒ»¸öÊı£¬´óĞ´ÎªÏòÁ¿£¨6Ïî£¬ËÙÄÍÁ¦¸ùÖÇpt£©
-//k = ÈËÍ· * ÑµÁ· * ¸É¾¢ * ÓÑÇé    //Ö§Ô®¿¨±¶ÂÊ
-//B = ÑµÁ·»ù´¡Öµ + Ö§Ô®¿¨¼Ó³É  //»ù´¡Öµ
-//C = link»ù´¡Öµ¼Ó³É£¬lv12345ÊÇµ±Ç°ÊôĞÔ¼Ó11223£¬pt¾ùÎª¼Ó1
-//G = ÂíÄï³É³¤ÂÊ
+//å°å†™ä¸ºä¸€ä¸ªæ•°ï¼Œå¤§å†™ä¸ºå‘é‡ï¼ˆ6é¡¹ï¼Œé€Ÿè€åŠ›æ ¹æ™ºptï¼‰
+//k = äººå¤´ * è®­ç»ƒ * å¹²åŠ² * å‹æƒ…    //æ”¯æ´å¡å€ç‡
+//B = è®­ç»ƒåŸºç¡€å€¼ + æ”¯æ´å¡åŠ æˆ  //åŸºç¡€å€¼
+//C = linkåŸºç¡€å€¼åŠ æˆï¼Œlv12345æ˜¯å½“å‰å±æ€§åŠ 11223ï¼Œptå‡ä¸ºåŠ 1
+//G = é©¬å¨˜æˆé•¿ç‡
 
-//L = k * B * G //ÏÂ²ã£¬ÏÈ²»È¡Õû
+//L = k * B * G //ä¸‹å±‚ï¼Œå…ˆä¸å–æ•´
 //P1 = L + k * C
-//P2 = P1 * (1 + ºìbuff±¶ÂÊ)£¬ºìbuff±¶ÂÊÖ»³ËÔÚµ±Ç°ÑµÁ·µÄÖ÷ÊôĞÔÉÏ
-//P3 = P2 * (1 + linkÊı¼Ó³É + ´ó»áÓÅÊ¤Êı¼Ó³É)
-//×ÜÊıT = P3 + À¶buff
-//ÉÏ²ãU = T - L
+//P2 = P1 * (1 + çº¢buffå€ç‡)ï¼Œçº¢buffå€ç‡åªä¹˜åœ¨å½“å‰è®­ç»ƒçš„ä¸»å±æ€§ä¸Š
+//P3 = P2 * (1 + linkæ•°åŠ æˆ + å¤§ä¼šä¼˜èƒœæ•°åŠ æˆ)
+//æ€»æ•°T = P3 + è“buff
+//ä¸Šå±‚U = T - L
 
 void Game::calculateTrainingValue()
 {
 
 
-  //¾ç±¾ÑµÁ·¼Ó³É
+  //å‰§æœ¬è®­ç»ƒåŠ æˆ
   uaf_trainingBonus = 0;
   int competitionFinishedNum = uaf_competitionFinishedNum();
   uaf_haveLose = false;
@@ -317,14 +317,14 @@ void Game::calculateTrainingValue()
     uaf_trainingBonus += GameConstants::UAF_WinNumTrainingBonus[winCount];
   }
 
-  //ÑµÁ·µÈ¼¶Ôö¼ÓÁ¿Óë¿¨ÊıµÄ¹ØÏµ
+  //è®­ç»ƒç­‰çº§å¢åŠ é‡ä¸å¡æ•°çš„å…³ç³»
   static const int cardNumLevelBonus[6] = { 0,1,2,2,3,3 };
 
-  //°ÑÉÁ²ÊµÄ¿¨°´personsµÄ±àºÅ¼ÇÏÂÀ´
+  //æŠŠé—ªå½©çš„å¡æŒ‰personsçš„ç¼–å·è®°ä¸‹æ¥
   bool isCardShining_record[6] = { false,false,false,false,false,false };
   int cardNum_record[5];
 
-  //¼ÆËãµÈ¼¶Ôö¼ÓÁ¿
+  //è®¡ç®—ç­‰çº§å¢åŠ é‡
   for (int tra = 0; tra < 5; tra++)
   {
     int cardNum = 0;
@@ -335,7 +335,7 @@ void Game::calculateTrainingValue()
       int pIdx = personDistribution[tra][h];
       if (pIdx < 0)break;
       const Person& p = persons[pIdx];
-      if (pIdx >= 6)continue;//²»ÊÇÖ§Ô®¿¨
+      if (pIdx >= 6)continue;//ä¸æ˜¯æ”¯æ´å¡
       assert(p.personType == PersonType_card || p.personType == PersonType_lianghuaCard || p.personType == PersonType_otherFriend || p.personType == PersonType_groupCard);
       
       cardNum += 1;
@@ -363,10 +363,10 @@ void Game::calculateTrainingValue()
   }
 
 
-  //linkÍ³¼ÆÓë¼Ó³É
-  int trainingColorNum[3];//ÈıÖÖÑÕÉ«µÄÑµÁ·¸öÊı
-  int levelGainColorTotal[3];//ÈıÖÖÑÕÉ«µÄÑµÁ·µÈ¼¶ÌáÉı×ÜÊı
-  int linkBasicValueBonus[3][6];//ÈıÖÖÑÕÉ«µÄ»ù´¡ÖµÔö¼ÓÁ¿
+  //linkç»Ÿè®¡ä¸åŠ æˆ
+  int trainingColorNum[3];//ä¸‰ç§é¢œè‰²çš„è®­ç»ƒä¸ªæ•°
+  int levelGainColorTotal[3];//ä¸‰ç§é¢œè‰²çš„è®­ç»ƒç­‰çº§æå‡æ€»æ•°
+  int linkBasicValueBonus[3][6];//ä¸‰ç§é¢œè‰²çš„åŸºç¡€å€¼å¢åŠ é‡
 
   for (int color = 0; color < 3; color++)
   {
@@ -389,24 +389,24 @@ void Game::calculateTrainingValue()
     if (trainingColorNum[color] <= 1)
     {
       for (int t = 0; t < 6; t++)
-        linkBasicValueBonus[color][t] = 0;//Ò»¸ölink¶¼Ã»ÓĞ³Ô²»µ½¼Ó³É
+        linkBasicValueBonus[color][t] = 0;//ä¸€ä¸ªlinkéƒ½æ²¡æœ‰åƒä¸åˆ°åŠ æˆ
     }
   }
 
-  //¼ÆËãÎå¸öÑµÁ·µÄ¸÷ÖÖÊıÖµ
+  //è®¡ç®—äº”ä¸ªè®­ç»ƒçš„å„ç§æ•°å€¼
   for (int t = 0; t < 5; t++)
   {
-    int basicValueLower[6] = { 0,0,0,0,0,0 };//ÑµÁ·µÄÏÂ²ã»ù´¡Öµ£¬=Ô­»ù´¡Öµ+Ö§Ô®¿¨¼Ó³É
-    double valueLowerDouble[6] = { 0,0,0,0,0,0 };//ÑµÁ·µÄÏÂ²ãÖµ£¬ÏÈ²»È¡Õû
-    double valueDouble[6] = { 0,0,0,0,0,0 };//ÑµÁ·µÄ×ÜÊı£¬ÏÈ²»È¡Õû
-    //int basicValue[6];//ÑµÁ·µÄ»ù´¡Öµ£¬= basicValueLower + linkBasicValueBonus
-    int cardNum = 0;//¼¸ÕÅ¿¨£¬ÀíÊÂ³¤¼ÇÕß²»Ëã
-    int totalXunlian = 0;//ÑµÁ·1+ÑµÁ·2+...
-    int totalGanjing = 0;//¸É¾¢1+¸É¾¢2+...
-    double totalYouqingMultiplier = 1.0;//(1+ÓÑÇé1)*(1+ÓÑÇé2)*...
-    int vitalCostBasic;//ÌåÁ¦ÏûºÄ»ù´¡Á¿£¬=ReLU(»ù´¡ÌåÁ¦ÏûºÄ+linkÌåÁ¦ÏûºÄÔö¼Ó-ÖÇ²ÊÌåÁ¦ÏûºÄ¼õÉÙ)
-    double vitalCostMultiplier = 1.0;//(1-ÌåÁ¦ÏûºÄ¼õÉÙÂÊ1)*(1-ÌåÁ¦ÏûºÄ¼õÉÙÂÊ2)*...
-    double failRateMultiplier = 1.0;//(1-Ê§°ÜÂÊÏÂ½µÂÊ1)*(1-Ê§°ÜÂÊÏÂ½µÂÊ2)*...
+    int basicValueLower[6] = { 0,0,0,0,0,0 };//è®­ç»ƒçš„ä¸‹å±‚åŸºç¡€å€¼ï¼Œ=åŸåŸºç¡€å€¼+æ”¯æ´å¡åŠ æˆ
+    double valueLowerDouble[6] = { 0,0,0,0,0,0 };//è®­ç»ƒçš„ä¸‹å±‚å€¼ï¼Œå…ˆä¸å–æ•´
+    double valueDouble[6] = { 0,0,0,0,0,0 };//è®­ç»ƒçš„æ€»æ•°ï¼Œå…ˆä¸å–æ•´
+    //int basicValue[6];//è®­ç»ƒçš„åŸºç¡€å€¼ï¼Œ= basicValueLower + linkBasicValueBonus
+    int cardNum = 0;//å‡ å¼ å¡ï¼Œç†äº‹é•¿è®°è€…ä¸ç®—
+    int totalXunlian = 0;//è®­ç»ƒ1+è®­ç»ƒ2+...
+    int totalGanjing = 0;//å¹²åŠ²1+å¹²åŠ²2+...
+    double totalYouqingMultiplier = 1.0;//(1+å‹æƒ…1)*(1+å‹æƒ…2)*...
+    int vitalCostBasic;//ä½“åŠ›æ¶ˆè€—åŸºç¡€é‡ï¼Œ=ReLU(åŸºç¡€ä½“åŠ›æ¶ˆè€—+linkä½“åŠ›æ¶ˆè€—å¢åŠ -æ™ºå½©ä½“åŠ›æ¶ˆè€—å‡å°‘)
+    double vitalCostMultiplier = 1.0;//(1-ä½“åŠ›æ¶ˆè€—å‡å°‘ç‡1)*(1-ä½“åŠ›æ¶ˆè€—å‡å°‘ç‡2)*...
+    double failRateMultiplier = 1.0;//(1-å¤±è´¥ç‡ä¸‹é™ç‡1)*(1-å¤±è´¥ç‡ä¸‹é™ç‡2)*...
 
     int color = uaf_trainingColor[t]; 
     int colorNum = trainingColorNum[color];
@@ -415,27 +415,27 @@ void Game::calculateTrainingValue()
     for (int i = 0; i < 6; i++)
       basicValueLower[i] = GameConstants::TrainingBasicValue[color][t][tlevel][i];
     vitalCostBasic = -GameConstants::TrainingBasicValue[color][t][tlevel][6];
-    vitalCostBasic += colorNum - 1;//linkÔ½¶àÌåÁ¦ÏûºÄÔ½¶à
+    vitalCostBasic += colorNum - 1;//linkè¶Šå¤šä½“åŠ›æ¶ˆè€—è¶Šå¤š
 
     for (int a = 0; a < 5; a++)
     {
       int pid = personDistribution[t][a];
-      if (pid < 0)break;//Ã»ÈË
-      if (pid >= 6)continue;//²»ÊÇ¿¨
+      if (pid < 0)break;//æ²¡äºº
+      if (pid >= 6)continue;//ä¸æ˜¯å¡
       cardNum += 1;
       const Person& p = persons[pid];
-      bool isThisCardShining = isCardShining_record[pid];//ÕâÕÅ¿¨ÉÁÃ»ÉÁ
-      bool isThisTrainingShining = trainShiningNum[t];//Õâ¸öÑµÁ·ÉÁÃ»ÉÁ
+      bool isThisCardShining = isCardShining_record[pid];//è¿™å¼ å¡é—ªæ²¡é—ª
+      bool isThisTrainingShining = trainShiningNum[t];//è¿™ä¸ªè®­ç»ƒé—ªæ²¡é—ª
       CardTrainingEffect eff = cardEffectCalculated ? cardEffects[pid] : 
         p.cardParam.getCardEffect(*this, isThisCardShining, t, p.friendship, p.cardRecord, cardNum_record[t], trainShiningNum[t]);
       if (!cardEffectCalculated)cardEffects[pid] = eff;
         
-      for (int i = 0; i < 6; i++)//»ù´¡Öµbonus
+      for (int i = 0; i < 6; i++)//åŸºç¡€å€¼bonus
       {
         if (basicValueLower[i] > 0)
           basicValueLower[i] += eff.bonus[i];
       }
-      if (isCardShining_record[pid])//ÉÁ²Ê£¬ÓÑÇé¼Ó³ÉºÍÖÇ²Ê»Ø¸´
+      if (isCardShining_record[pid])//é—ªå½©ï¼Œå‹æƒ…åŠ æˆå’Œæ™ºå½©å›å¤
       {
         totalYouqingMultiplier *= (1 + 0.01 * eff.youQing);
         if (t == TRA_wiz)
@@ -448,9 +448,9 @@ void Game::calculateTrainingValue()
 
     }
 
-    //ÌåÁ¦£¬Ê§°ÜÂÊ
+    //ä½“åŠ›ï¼Œå¤±è´¥ç‡
 
-    if (vitalCostBasic < 0)//uafÑµÁ·²»»á¼ÓÌåÁ¦£¬¼´Ê¹ÊÇºÜ¶àÖÇ²Ê
+    if (vitalCostBasic < 0)//uafè®­ç»ƒä¸ä¼šåŠ ä½“åŠ›ï¼Œå³ä½¿æ˜¯å¾ˆå¤šæ™ºå½©
       vitalCostBasic = 0;
     int vitalChangeInt = -int(vitalCostBasic * vitalCostMultiplier);
     if (vitalChangeInt > maxVital - vital)vitalChangeInt = maxVital - vital;
@@ -459,11 +459,11 @@ void Game::calculateTrainingValue()
     failRate[t] = calculateFailureRate(t, failRateMultiplier);
 
 
-    //ÈËÍ· * ÑµÁ· * ¸É¾¢ * ÓÑÇé    //Ö§Ô®¿¨±¶ÂÊ
+    //äººå¤´ * è®­ç»ƒ * å¹²åŠ² * å‹æƒ…    //æ”¯æ´å¡å€ç‡
     double cardMultiplier = (1 + 0.05 * cardNum) * (1 + 0.01 * totalXunlian) * (1 + 0.1 * (motivation - 3) * (1 + 0.01 * totalGanjing)) * totalYouqingMultiplier;
     trainValueCardMultiplier[t] = cardMultiplier;
 
-    //ÏÂ²ã¿ÉÒÔ¿ªÊ¼ËãÁË
+    //ä¸‹å±‚å¯ä»¥å¼€å§‹ç®—äº†
     for (int i = 0; i < 6; i++)
     {
       bool isRelated = basicValueLower[i] != 0;
@@ -471,7 +471,7 @@ void Game::calculateTrainingValue()
       double umaBonus = i < 5 ? 1 + 0.01 * fiveStatusBonus[i] : 1;
       valueLowerDouble[i] = bvl * cardMultiplier * umaBonus;
       valueDouble[i] = valueLowerDouble[i];
-      //¼ÓÉÏlinkÑµÁ·
+      //åŠ ä¸Šlinkè®­ç»ƒ
       if (i != t)
       {
         valueDouble[i] += linkBasicValueBonus[color][i] * cardMultiplier * (isRelated ? umaBonus : 1);
@@ -482,24 +482,24 @@ void Game::calculateTrainingValue()
       
     }
     
-    //Ö÷ÊôĞÔlinkÊı¼Ó³É
+    //ä¸»å±æ€§linkæ•°åŠ æˆ
     int linkNumTrainingRate = isXiahesu() ? GameConstants::UAF_LinkNumBonusXiahesu[colorNum] : GameConstants::UAF_LinkNumBonus[colorNum];
     valueDouble[t] *= 1.0 + 0.01 * linkNumTrainingRate;
 
-    //¾ç±¾¼Ó³É
+    //å‰§æœ¬åŠ æˆ
     for (int i = 0; i < 6; i++)
     {
       valueDouble[i] *= 1.0 + 0.01 * uaf_trainingBonus;
     }
 
-    //ºìbuff±¶ÂÊÖ»³ËÔÚµ±Ç°ÑµÁ·µÄÖ÷ÊôĞÔÉÏ
+    //çº¢buffå€ç‡åªä¹˜åœ¨å½“å‰è®­ç»ƒçš„ä¸»å±æ€§ä¸Š
     if (uaf_buffNum[1] > 0)
     {
       double redBuffMultiplier = 1 + 0.01 * GameConstants::UAF_RedBuffBonus[colorNum];
       valueDouble[t] *= redBuffMultiplier;
     }
 
-    //À¶buff
+    //è“buff
     if (uaf_buffNum[0] > 0)
     {
       for (int i = 0; i < 5; i++)
@@ -512,11 +512,11 @@ void Game::calculateTrainingValue()
       valueDouble[5] += 20;
     }
 
-    //ÉÏ²ã=×ÜÊı-ÏÂ²ã
+    //ä¸Šå±‚=æ€»æ•°-ä¸‹å±‚
 
     for (int i = 0; i < 6; i++)
     {
-      //upperÊÇ×ÜÊı¼õÈ¥¿¼ÂÇ100ÉÏÏŞµÄÏÂ²ã
+      //upperæ˜¯æ€»æ•°å‡å»è€ƒè™‘100ä¸Šé™çš„ä¸‹å±‚
       trainValueLower[t][i] = calculateRealStatusGain(i, trainValueLower[t][i]);
       int upper = valueDouble[i] - trainValueLower[t][i];
       if (upper > 100)upper = 100;
@@ -528,7 +528,7 @@ void Game::calculateTrainingValue()
   }
   cardEffectCalculated = true;
 }
-int Game::calculateRealStatusGain(int idx, int value) const//¿¼ÂÇ1200ÒÔÉÏÎª2µÄ±¶ÊıµÄÊµ¼ÊÊôĞÔÔö¼ÓÖµ
+int Game::calculateRealStatusGain(int idx, int value) const//è€ƒè™‘1200ä»¥ä¸Šä¸º2çš„å€æ•°çš„å®é™…å±æ€§å¢åŠ å€¼
 {
   if (idx == 5)return value;
   int newValue = fiveStatus[idx] + value;
@@ -585,7 +585,7 @@ void Game::addJiBan(int idx, int value)
   }
   else if (p.personType == 4 || p.personType == 5 || p.personType == 6)
   {
-    //²»±ä
+    //ä¸å˜
   }
   else //npc
     value = 0;
@@ -598,8 +598,8 @@ void Game::addAllStatus(int value)
 }
 int Game::calculateFailureRate(int trainType, double failRateMultiply) const
 {
-  //´ÖÂÔÄâºÏµÄÑµÁ·Ê§°ÜÂÊ£¬¶ş´Îº¯Êı A*(x0-x)^2+B*(x0-x)
-  //Îó²îÓ¦¸ÃÔÚ2%ÒÔÄÚ
+  //ç²—ç•¥æ‹Ÿåˆçš„è®­ç»ƒå¤±è´¥ç‡ï¼ŒäºŒæ¬¡å‡½æ•° A*(x0-x)^2+B*(x0-x)
+  //è¯¯å·®åº”è¯¥åœ¨2%ä»¥å†…
   static const double A = 0.025;
   static const double B = 1.25;
   double x0 = 0.1 * GameConstants::FailRateBasic;
@@ -611,8 +611,8 @@ int Game::calculateFailureRate(int trainType, double failRateMultiply) const
     f = A * dif * dif + B * dif;
   }
   if (f < 0)f = 0;
-  if (f > 99)f = 99;//ÎŞÁ·Ï°ÏÂÊÖ£¬Ê§°ÜÂÊ×î¸ß99%
-  f *= failRateMultiply;//Ö§Ô®¿¨µÄÑµÁ·Ê§°ÜÂÊÏÂ½µ´ÊÌõ
+  if (f > 99)f = 99;//æ— ç»ƒä¹ ä¸‹æ‰‹ï¼Œå¤±è´¥ç‡æœ€é«˜99%
+  f *= failRateMultiply;//æ”¯æ´å¡çš„è®­ç»ƒå¤±è´¥ç‡ä¸‹é™è¯æ¡
   int fr = round(f);
   fr += failureRateBias;
   if (fr < 0)fr = 0;
@@ -636,11 +636,11 @@ int Game::uaf_competitionFinishedNum() const
 bool Game::isXiangtanLegal(int x) const
 {
   if (x == XT_none)return true;
-  if (Action::XiangtanNumCost[x] > uaf_xiangtanRemain)return false;//ÏàÌ¸´ÎÊı²»¹»
+  if (Action::XiangtanNumCost[x] > uaf_xiangtanRemain)return false;//ç›¸è°ˆæ¬¡æ•°ä¸å¤Ÿ
   bool haveColor[3] = { false,false,false };
   for (int i = 0; i < 5; i++)
     haveColor[uaf_trainingColor[i]] = true;
-  if (x <= 6)//Ò»´ÎÏàÌ¸
+  if (x <= 6)//ä¸€æ¬¡ç›¸è°ˆ
   {
     if (!haveColor[Action::XiangtanFromColor[x]])
       return false;
@@ -669,7 +669,7 @@ void Game::xiangtanAndRecalculate(int x, bool forHandwrittenLogic)
   uaf_xiangtanRemain -= Action::XiangtanNumCost[x];
   assert(uaf_xiangtanRemain >= 0);
   if (!forHandwrittenLogic)
-    cardEffectCalculated = false;//±£ÏÕÆğ¼û£¬ÖØĞÂ¼ÆËã£¬±ÈÈçËÙË¾»úÖ®ÀàµÄ¹ÌÓĞ¿ÉÄÜ»á¸Ä±ä
+    cardEffectCalculated = false;//ä¿é™©èµ·è§ï¼Œé‡æ–°è®¡ç®—ï¼Œæ¯”å¦‚é€Ÿå¸æœºä¹‹ç±»çš„å›ºæœ‰å¯èƒ½ä¼šæ”¹å˜
   calculateTrainingValue();
 }
 void Game::runRace(int basicFiveStatusBonus, int basicPtBonus)
@@ -729,26 +729,26 @@ void Game::handleFriendOutgoing(std::mt19937_64& rand)
   }
   else if (lianghua_outgoingUsed == 4)
   {
-    //ÓĞ´ó³É¹¦ºÍ³É¹¦
-    if (rand() % 4 != 0)//´ÖÂÔ¹À¼Æ£¬75%´ó³É¹¦
+    //æœ‰å¤§æˆåŠŸå’ŒæˆåŠŸ
+    if (rand() % 4 != 0)//ç²—ç•¥ä¼°è®¡ï¼Œ75%å¤§æˆåŠŸ
     {
       addVitalFriend(40);
       addMotivation(1);
       addStatusFriend(0, 30);
       addJiBan(pid, 5);
-      skillPt += 72;//½ğ¼¼ÄÜµÈ¼Û
+      skillPt += 72;//é‡‘æŠ€èƒ½ç­‰ä»·
     }
     else
     {
       addVitalFriend(35);
       addStatusFriend(0, 15);
       addJiBan(pid, 5);
-      skillPt += 40;//½ğ¼¼ÄÜµÈ¼Û
+      skillPt += 40;//é‡‘æŠ€èƒ½ç­‰ä»·
     }
   }
-  else assert(false && "Î´ÖªµÄ³öĞĞ");
+  else assert(false && "æœªçŸ¥çš„å‡ºè¡Œ");
 
-  //È«ÌåµÈ¼¶+1
+  //å…¨ä½“ç­‰çº§+1
   for(int i=0;i<3;i++)
     for (int j = 0; j < 5; j++)
     {
@@ -761,7 +761,7 @@ void Game::handleFriendOutgoing(std::mt19937_64& rand)
 }
 void Game::handleFriendUnlock(std::mt19937_64& rand)
 {
-  printEvents("ÓÑÈËÍâ³ö½âËø£¡");
+  printEvents("å‹äººå¤–å‡ºè§£é”ï¼");
   maxVital += 4;
   if (maxVital > 120)maxVital = 120;
   addVitalFriend(20);
@@ -774,7 +774,7 @@ void Game::handleFriendClickEvent(std::mt19937_64& rand, int atTrain)
   assert(persons[lianghua_personId].personType == PersonType_lianghuaCard);
   if (persons[lianghua_personId].friendOrGroupCardStage == 0)
   {
-    printEvents("µÚÒ»´ÎµãÓÑÈË"); 
+    printEvents("ç¬¬ä¸€æ¬¡ç‚¹å‹äºº"); 
     persons[lianghua_personId].friendOrGroupCardStage = 1;
     maxVital += 4;
     if (maxVital > 120)maxVital = 120;
@@ -785,14 +785,14 @@ void Game::handleFriendClickEvent(std::mt19937_64& rand, int atTrain)
   }
   else
   {
-    if (rand() % 5 < 3)return;//40%¸ÅÂÊ³öÊÂ¼ş£¬60%¸ÅÂÊ²»³ö
+    if (rand() % 5 < 3)return;//40%æ¦‚ç‡å‡ºäº‹ä»¶ï¼Œ60%æ¦‚ç‡ä¸å‡º
     addJiBan(lianghua_personId, 5);
     addVitalFriend(7);
     if (rand() % 10 == 0)
     {
       if (motivation != 5)
-        printEvents("ÓÑÈËÊÂ¼şĞÄÇé+1");
-      addMotivation(1);//10%¸ÅÂÊ¼ÓĞÄÇé
+        printEvents("å‹äººäº‹ä»¶å¿ƒæƒ…+1");
+      addMotivation(1);//10%æ¦‚ç‡åŠ å¿ƒæƒ…
     }
 
   }
@@ -800,8 +800,8 @@ void Game::handleFriendClickEvent(std::mt19937_64& rand, int atTrain)
 }
 void Game::handleFriendFixedEvent()
 {
-  if (lianghua_type == 0)return;//Ã»ÓÑÈË¿¨
-  if (persons[lianghua_personId].friendOrGroupCardStage < 2)return;//³öĞĞÃ»½âËø¾ÍÃ»ÊÂ¼ş
+  if (lianghua_type == 0)return;//æ²¡å‹äººå¡
+  if (persons[lianghua_personId].friendOrGroupCardStage < 2)return;//å‡ºè¡Œæ²¡è§£é”å°±æ²¡äº‹ä»¶
   if (turn == 23)
   {
     maxVital += 4;
@@ -810,11 +810,11 @@ void Game::handleFriendFixedEvent()
     addMotivation(1);
     addStatusFriend(0, 10);
     addJiBan(lianghua_personId, 5);
-    skillPt += 40;//Èı¼¶Ä©½Å£¬¿¼ÂÇµ½×îºó»á¸øÈ«ÉíÈ«Áé£¬¶øÇÒÓĞ½ø»¯£¬Òò´ËÕâ¸öhintÊÇÓĞĞ§µÄ
+    skillPt += 40;//ä¸‰çº§æœ«è„šï¼Œè€ƒè™‘åˆ°æœ€åä¼šç»™å…¨èº«å…¨çµï¼Œè€Œä¸”æœ‰è¿›åŒ–ï¼Œå› æ­¤è¿™ä¸ªhintæ˜¯æœ‰æ•ˆçš„
   }
   else if (turn == 77)
   {
-    if (lianghua_outgoingUsed >= 5)//×ßÍê³öĞĞ
+    if (lianghua_outgoingUsed >= 5)//èµ°å®Œå‡ºè¡Œ
     {
       addStatusFriend(0, 30);
       addStatusFriend(4, 30);
@@ -830,7 +830,7 @@ void Game::handleFriendFixedEvent()
   }
   else
   {
-    assert(false && "ÆäËû»ØºÏÃ»ÓĞÓÑÈË¹Ì¶¨ÊÂ¼ş");
+    assert(false && "å…¶ä»–å›åˆæ²¡æœ‰å‹äººå›ºå®šäº‹ä»¶");
   }
 }
 void Game::checkLianghuaGuyou()
@@ -854,11 +854,11 @@ bool Game::applyTraining(std::mt19937_64& rand, Action action)
 {
   if (isRacing)
   {
-    assert(false && "ËùÓĞ¾ç±¾±ÈÈü¶¼ÔÚcheckEventAfterTrain()Àï´¦Àí£¬²»ÄÜapplyTraining");
+    assert(false && "æ‰€æœ‰å‰§æœ¬æ¯”èµ›éƒ½åœ¨checkEventAfterTrain()é‡Œå¤„ç†ï¼Œä¸èƒ½applyTraining");
     uaf_lastTurnNotTrain = true;
-    return false;//ËùÓĞ¾ç±¾±ÈÈü¶¼ÔÚcheckEventAfterTrain()Àï´¦Àí£¨Ïàµ±ÓÚ±ÈÈü»ØºÏÖ±½ÓÌø¹ı£©£¬²»ÔÚÕâ¸öº¯Êı
+    return false;//æ‰€æœ‰å‰§æœ¬æ¯”èµ›éƒ½åœ¨checkEventAfterTrain()é‡Œå¤„ç†ï¼ˆç›¸å½“äºæ¯”èµ›å›åˆç›´æ¥è·³è¿‡ï¼‰ï¼Œä¸åœ¨è¿™ä¸ªå‡½æ•°
   }
-  if (action.train == TRA_rest)//ĞİÏ¢
+  if (action.train == TRA_rest)//ä¼‘æ¯
   {
     if (isXiahesu())
     {
@@ -877,41 +877,41 @@ bool Game::applyTraining(std::mt19937_64& rand, Action action)
     }
     uaf_lastTurnNotTrain = true;
   }
-  else if (action.train == TRA_race)//±ÈÈü
+  else if (action.train == TRA_race)//æ¯”èµ›
   {
     if (turn <= 12 || turn >= 72)
     {
       printEvents("Cannot race now."); 
       return false;
     }
-    addAllStatus(1);//ÎäÕßÕñ
-    runRace(2, 40);//´ÖÂÔµÄ½üËÆ
+    addAllStatus(1);//æ­¦è€…æŒ¯
+    runRace(2, 40);//ç²—ç•¥çš„è¿‘ä¼¼
 
-    //¿ÛÌå¹Ì¶¨15
+    //æ‰£ä½“å›ºå®š15
     addVital(-15);
     if (rand() % 10 == 0)
       addMotivation(1);
     uaf_lastTurnNotTrain = true;
   }
-  else if (action.train == TRA_outgoing)//Íâ³ö
+  else if (action.train == TRA_outgoing)//å¤–å‡º
   {
     if (isXiahesu())
     {
-      printEvents("ÏÄºÏËŞÖ»ÄÜĞİÏ¢£¬²»ÄÜÍâ³ö");
+      printEvents("å¤åˆå®¿åªèƒ½ä¼‘æ¯ï¼Œä¸èƒ½å¤–å‡º");
       return false;
     }
 
-    //Á¹»¨³öĞĞ
-    if (lianghua_type != 0 &&  //´øÁËÁ¹»¨¿¨
-      persons[lianghua_personId].friendOrGroupCardStage >= 2 &&  //ÒÑ½âËøÍâ³ö
-      lianghua_outgoingUsed < 5  //Íâ³öÃ»×ßÍê
+    //å‡‰èŠ±å‡ºè¡Œ
+    if (lianghua_type != 0 &&  //å¸¦äº†å‡‰èŠ±å¡
+      persons[lianghua_personId].friendOrGroupCardStage >= 2 &&  //å·²è§£é”å¤–å‡º
+      lianghua_outgoingUsed < 5  //å¤–å‡ºæ²¡èµ°å®Œ
       )
     {
       handleFriendOutgoing(rand);
     }
-    else //ÆÕÍ¨³öĞĞ
+    else //æ™®é€šå‡ºè¡Œ
     {
-      //ÀÁµÃ²é¸ÅÂÊÁË£¬¾Í50%¼Ó2ĞÄÇé£¬50%¼Ó1ĞÄÇé10ÌåÁ¦
+      //æ‡’å¾—æŸ¥æ¦‚ç‡äº†ï¼Œå°±50%åŠ 2å¿ƒæƒ…ï¼Œ50%åŠ 1å¿ƒæƒ…10ä½“åŠ›
       if (rand() % 2)
         addMotivation(2);
       else
@@ -922,60 +922,60 @@ bool Game::applyTraining(std::mt19937_64& rand, Action action)
     }
     uaf_lastTurnNotTrain = true;
   }
-  else if (action.train <= 4 && action.train >= 0)//³£¹æÑµÁ·
+  else if (action.train <= 4 && action.train >= 0)//å¸¸è§„è®­ç»ƒ
   {
     if (action.xiangtanType != XT_none)
       xiangtanAndRecalculate(action.xiangtanType, false);
 
-    if (rand() % 100 < failRate[action.train])//ÑµÁ·Ê§°Ü
+    if (rand() % 100 < failRate[action.train])//è®­ç»ƒå¤±è´¥
     {
-      if (failRate[action.train] >= 20 && (rand() % 100 < failRate[action.train]))//ÑµÁ·´óÊ§°Ü£¬¸ÅÂÊÊÇÏ¹²ÂµÄ
+      if (failRate[action.train] >= 20 && (rand() % 100 < failRate[action.train]))//è®­ç»ƒå¤§å¤±è´¥ï¼Œæ¦‚ç‡æ˜¯ççŒœçš„
       {
-        printEvents("ÑµÁ·´óÊ§°Ü£¡");
+        printEvents("è®­ç»ƒå¤§å¤±è´¥ï¼");
         addStatus(action.train, -10);
         if (fiveStatus[action.train] > 1200)
-          addStatus(action.train, -10);//ÓÎÏ·Àï1200ÒÔÉÏ¿ÛÊôĞÔ²»ÕÛ°ë£¬ÔÚ´ËÄ£ÄâÆ÷Àï¶ÔÓ¦1200ÒÔÉÏ·­±¶
-        //Ëæ»ú¿Û2¸ö10£¬²»·Á¸Ä³ÉÈ«ÊôĞÔ-4½µµÍËæ»úĞÔ
+          addStatus(action.train, -10);//æ¸¸æˆé‡Œ1200ä»¥ä¸Šæ‰£å±æ€§ä¸æŠ˜åŠï¼Œåœ¨æ­¤æ¨¡æ‹Ÿå™¨é‡Œå¯¹åº”1200ä»¥ä¸Šç¿»å€
+        //éšæœºæ‰£2ä¸ª10ï¼Œä¸å¦¨æ”¹æˆå…¨å±æ€§-4é™ä½éšæœºæ€§
         for (int i = 0; i < 5; i++)
         {
           addStatus(i, -4);
           if (fiveStatus[i] > 1200)
-            addStatus(i, -4);//ÓÎÏ·Àï1200ÒÔÉÏ¿ÛÊôĞÔ²»ÕÛ°ë£¬ÔÚ´ËÄ£ÄâÆ÷Àï¶ÔÓ¦1200ÒÔÉÏ·­±¶
+            addStatus(i, -4);//æ¸¸æˆé‡Œ1200ä»¥ä¸Šæ‰£å±æ€§ä¸æŠ˜åŠï¼Œåœ¨æ­¤æ¨¡æ‹Ÿå™¨é‡Œå¯¹åº”1200ä»¥ä¸Šç¿»å€
         }
         addMotivation(-3);
         addVital(10);
       }
-      else//Ğ¡Ê§°Ü
+      else//å°å¤±è´¥
       {
-        printEvents("ÑµÁ·Ğ¡Ê§°Ü£¡");
+        printEvents("è®­ç»ƒå°å¤±è´¥ï¼");
         addStatus(action.train, -5);
         if (fiveStatus[action.train] > 1200)
-          addStatus(action.train, -5);//ÓÎÏ·Àï1200ÒÔÉÏ¿ÛÊôĞÔ²»ÕÛ°ë£¬ÔÚ´ËÄ£ÄâÆ÷Àï¶ÔÓ¦1200ÒÔÉÏ·­±¶
+          addStatus(action.train, -5);//æ¸¸æˆé‡Œ1200ä»¥ä¸Šæ‰£å±æ€§ä¸æŠ˜åŠï¼Œåœ¨æ­¤æ¨¡æ‹Ÿå™¨é‡Œå¯¹åº”1200ä»¥ä¸Šç¿»å€
         addMotivation(-1);
       }
     }
     else
     {
-      //ÏÈ¼ÓÉÏÑµÁ·Öµ
+      //å…ˆåŠ ä¸Šè®­ç»ƒå€¼
       for (int i = 0; i < 5; i++)
         addStatus(i, trainValue[action.train][i]);
       skillPt += trainValue[action.train][5];
       addVital(trainVitalChange[action.train]);
 
-      vector<int> hintCards;//ÓĞÄÄ¼¸¸ö¿¨³öºì¸ĞÌ¾ºÅÁË
-      bool clickFriend = false;//Õâ¸öÑµÁ·ÓĞÃ»ÓĞÓÑÈË
+      vector<int> hintCards;//æœ‰å“ªå‡ ä¸ªå¡å‡ºçº¢æ„Ÿå¹å·äº†
+      bool clickFriend = false;//è¿™ä¸ªè®­ç»ƒæœ‰æ²¡æœ‰å‹äºº
       for (int i = 0; i < 5; i++)
       {
         int p = personDistribution[action.train][i];
-        if (p < 0)break;//Ã»ÈË
+        if (p < 0)break;//æ²¡äºº
         int personType = persons[p].personType;
 
-        if (personType == PersonType_lianghuaCard)//ÓÑÈË¿¨
+        if (personType == PersonType_lianghuaCard)//å‹äººå¡
         {
           addJiBan(p, 4);
           clickFriend = true;
         }
-        else if (personType== PersonType_card)//ÆÕÍ¨¿¨
+        else if (personType== PersonType_card)//æ™®é€šå¡
         {
           addJiBan(p, 7);
           if(persons[p].isHint)
@@ -985,21 +985,21 @@ bool Game::applyTraining(std::mt19937_64& rand, Action action)
         {
           assert(false);
         }
-        else if (personType == PersonType_lishizhang)//ÀíÊÂ³¤
+        else if (personType == PersonType_lishizhang)//ç†äº‹é•¿
         {
           int jiban = persons[p].friendship;
           int g = jiban < 40 ? 2 : jiban < 60 ? 3 : jiban < 80 ? 4 : 5;
           skillPt += g;
           addJiBan(p, 7);
         }
-        else if (personType == PersonType_jizhe)//¼ÇÕß
+        else if (personType == PersonType_jizhe)//è®°è€…
         {
           int jiban = persons[p].friendship;
           int g = jiban < 40 ? 2 : jiban < 60 ? 3 : jiban < 80 ? 4 : 5;
           addStatus(action.train, g);
           addJiBan(p, 9);
         }
-        else if (personType == PersonType_lianghuaNonCard)//ÎŞ¿¨ÓÑÈË
+        else if (personType == PersonType_lianghuaNonCard)//æ— å¡å‹äºº
         {
           int jiban = persons[p].friendship;
           int g = jiban < 40 ? 2 : jiban < 60 ? 3 : jiban < 80 ? 4 : 5;
@@ -1008,21 +1008,21 @@ bool Game::applyTraining(std::mt19937_64& rand, Action action)
         }
         else
         {
-          //ÆäËûÓÑÈË/ÍÅ¿¨Ôİ²»Ö§³Ö
+          //å…¶ä»–å‹äºº/å›¢å¡æš‚ä¸æ”¯æŒ
           assert(false);
         }
       }
 
       if (hintCards.size() > 0)
       {
-        int hintCard = hintCards[rand() % hintCards.size()];//Ëæ»úÒ»ÕÅ¿¨³öhint
+        int hintCard = hintCards[rand() % hintCards.size()];//éšæœºä¸€å¼ å¡å‡ºhint
 
         addJiBan(hintCard, 5);
         auto& hintBonus = persons[hintCard].cardParam.hintBonus;
         for (int i = 0; i < 5; i++)
           addStatus(i, hintBonus[i]);
         skillPt += hintBonus[5];
-        //»Æbuff£¬Ë«±¶
+        //é»„buffï¼ŒåŒå€
         if (uaf_buffNum[2] > 0)
         {
           for (int i = 0; i < 5; i++)
@@ -1035,7 +1035,7 @@ bool Game::applyTraining(std::mt19937_64& rand, Action action)
         handleFriendClickEvent(rand, action.train);
       
 
-      //ÑµÁ·µÈ¼¶ÌáÉı
+      //è®­ç»ƒç­‰çº§æå‡
       int thisColor = uaf_trainingColor[action.train];
       for (int i = 0; i < 5; i++)
       {
@@ -1048,7 +1048,7 @@ bool Game::applyTraining(std::mt19937_64& rand, Action action)
 
     }
 
-    //buff´ÎÊı-1
+    //buffæ¬¡æ•°-1
     for (int color = 0; color < 3; color++)
     {
       if (uaf_buffNum[color] > 0)uaf_buffNum[color] -= 1;
@@ -1057,7 +1057,7 @@ bool Game::applyTraining(std::mt19937_64& rand, Action action)
   }
   else
   {
-    printEvents("Î´ÖªµÄÑµÁ·ÏîÄ¿");
+    printEvents("æœªçŸ¥çš„è®­ç»ƒé¡¹ç›®");
     uaf_lastTurnNotTrain = true;
     return false;
   }
@@ -1069,11 +1069,11 @@ bool Game::isLegal(Action action) const
 {
   if (isRacing)
   {
-    assert(false && "ËùÓĞ¾ç±¾±ÈÈü¶¼ÔÚcheckEventAfterTrain()Àï´¦Àí£¬²»ÄÜapplyTraining");
-    return false;//ËùÓĞ¾ç±¾±ÈÈü¶¼ÔÚcheckEventAfterTrain()Àï´¦Àí£¨Ïàµ±ÓÚ±ÈÈü»ØºÏÖ±½ÓÌø¹ı£©£¬²»ÔÚÕâ¸öº¯Êı
+    assert(false && "æ‰€æœ‰å‰§æœ¬æ¯”èµ›éƒ½åœ¨checkEventAfterTrain()é‡Œå¤„ç†ï¼Œä¸èƒ½applyTraining");
+    return false;//æ‰€æœ‰å‰§æœ¬æ¯”èµ›éƒ½åœ¨checkEventAfterTrain()é‡Œå¤„ç†ï¼ˆç›¸å½“äºæ¯”èµ›å›åˆç›´æ¥è·³è¿‡ï¼‰ï¼Œä¸åœ¨è¿™ä¸ªå‡½æ•°
   }
   if (action.xiangtanType != XT_none && (!(action.train >= 0 && action.train <= 4)))
-    return false;//ÏàÌ¸µ«²»ÑµÁ·
+    return false;//ç›¸è°ˆä½†ä¸è®­ç»ƒ
   if (action.train == TRA_rest)
   {
     return true;
@@ -1082,7 +1082,7 @@ bool Game::isLegal(Action action) const
   {
     if (isXiahesu())
     {
-      return false;//ÎÒ½«ÏÄºÏËŞµÄÍâ³ö³ÆÎªĞİÏ¢
+      return false;//æˆ‘å°†å¤åˆå®¿çš„å¤–å‡ºç§°ä¸ºä¼‘æ¯
     }
     return true;
   }
@@ -1098,8 +1098,8 @@ bool Game::isLegal(Action action) const
   {
     if (!isXiangtanLegal(action.xiangtanType))
       return false;
-    //¼ì²éÏàÌ¸ÊÇ·ñÓĞÒâÒå
-    //´ó²¿·ÖÇé¿öÒÑ¾­ÔÚisXiangtanLegalÀïÅÅ³ı£¬Ö»Ê£ÏÂÒ»ÖÖÇé¿öÃ»ÅÅ³ı£ºÖ»ÏàÌ¸Ò»ÖÖa¸ÄÉ«b£¬¶øÕâ¸öÑµÁ·ÊÇc
+    //æ£€æŸ¥ç›¸è°ˆæ˜¯å¦æœ‰æ„ä¹‰
+    //å¤§éƒ¨åˆ†æƒ…å†µå·²ç»åœ¨isXiangtanLegalé‡Œæ’é™¤ï¼Œåªå‰©ä¸‹ä¸€ç§æƒ…å†µæ²¡æ’é™¤ï¼šåªç›¸è°ˆä¸€ç§aæ”¹è‰²bï¼Œè€Œè¿™ä¸ªè®­ç»ƒæ˜¯c
     if (action.xiangtanType >= 1 && action.xiangtanType <= 6)
     {
       int c = uaf_trainingColor[action.train];
@@ -1110,7 +1110,7 @@ bool Game::isLegal(Action action) const
   }
   else
   {
-    assert(false && "Î´ÖªµÄÑµÁ·ÏîÄ¿");
+    assert(false && "æœªçŸ¥çš„è®­ç»ƒé¡¹ç›®");
     return false;
   }
   return false;
@@ -1156,18 +1156,18 @@ void Game::checkEventAfterTrain(std::mt19937_64& rand)
   checkRandomEvents(rand);
 
 
-  //»ØºÏÊı+1
+  //å›åˆæ•°+1
   turn++;
   if (turn < TOTAL_TURN)
   {
     isRacing = isRacingTurn[turn];
     if (isRacing)
-      checkEventAfterTrain(rand);//Ìø¹ıÕâ¸ö»ØºÏ
+      checkEventAfterTrain(rand);//è·³è¿‡è¿™ä¸ªå›åˆ
   }
   else
   {
-    printEvents("Óı³É½áÊø!");
-    printEvents("ÄãµÄµÃ·ÖÊÇ£º" + to_string(finalScore()));
+    printEvents("è‚²æˆç»“æŸ!");
+    printEvents("ä½ çš„å¾—åˆ†æ˜¯ï¼š" + to_string(finalScore()));
   }
 
 }
@@ -1186,13 +1186,13 @@ void Game::uaf_checkNewBuffAfterLevelGain()
       uaf_buffNum[color] += 2 * (buffNumTotal - buffNumUsed);
       uaf_buffActivated[color] = buffNumTotal;
     }
-    else if (buffNumTotal < buffNumUsed)//¿ÉÄÜÊÇÆäËûµØ·½´Û¸ÄÁËÑµÁ·µÈ¼¶£¬±ÈÈçSelfplay/GameGenerator
+    else if (buffNumTotal < buffNumUsed)//å¯èƒ½æ˜¯å…¶ä»–åœ°æ–¹ç¯¡æ”¹äº†è®­ç»ƒç­‰çº§ï¼Œæ¯”å¦‚Selfplay/GameGenerator
     {
       uaf_buffActivated[color] = buffNumTotal;
     }
   }
 }
-void Game::uaf_runCompetition(int n)//µÚn´Îuaf´ó»á
+void Game::uaf_runCompetition(int n)//ç¬¬næ¬¡uafå¤§ä¼š
 {
   uaf_xiangtanRemain = 3;
   int winCount = 0;
@@ -1210,24 +1210,24 @@ void Game::uaf_runCompetition(int n)//µÚn´Îuaf´ó»á
 
   }
 
-  if (winCount < 12)// <12win Í»ÆÆ/ÈëÉÍ
+  if (winCount < 12)// <12win çªç ´/å…¥èµ
   {
-    //ÒÀ´ÎÊÇ3£¬5£¬10£¬15£¬20
+    //ä¾æ¬¡æ˜¯3ï¼Œ5ï¼Œ10ï¼Œ15ï¼Œ20
     int statusGain = n * 5;
     if (statusGain == 0)statusGain = 3;
     if (isLinkUma)statusGain += 3;
     addAllStatus(statusGain);
     skillPt += 30 + 10 * n;
   }
-  else // >=12win ×ÛºÏÓÅÊ¤»òÓÅÊ¤
+  else // >=12win ç»¼åˆä¼˜èƒœæˆ–ä¼˜èƒœ
   {
-    addJiBan(6, 5);//ÀíÊÂ³¤î¿°í
+    addJiBan(6, 5);//ç†äº‹é•¿ç¾ç»Š
     int statusGain = 5 + n * 5;
     if (isLinkUma)statusGain += 3;
     addAllStatus(statusGain);
     skillPt += 40 + 10 * n;
   }
-  if (winCount == 15) //È«Ê¤
+  if (winCount == 15) //å…¨èƒœ
   {
     addMotivation(1);
     addVital(15);
@@ -1235,131 +1235,131 @@ void Game::uaf_runCompetition(int n)//µÚn´Îuaf´ó»á
 }
 void Game::checkFixedEvents(std::mt19937_64& rand)
 {
-  //´¦Àí¸÷ÖÖ¹Ì¶¨ÊÂ¼ş
+  //å¤„ç†å„ç§å›ºå®šäº‹ä»¶
   uaf_checkNewBuffAfterLevelGain();
-  if (isRacing)//ÉúÑÄ±ÈÈü
+  if (isRacing)//ç”Ÿæ¶¯æ¯”èµ›
   {
     if (turn < 72)
     {
       runRace(3, 45);
       addJiBan(6, 4);
     }
-    //·ñÔòÊÇura±ÈÈü£¬ÔÚºóÃæÓĞµ¥¶ÀµÄ´¦Àí
+    //å¦åˆ™æ˜¯uraæ¯”èµ›ï¼Œåœ¨åé¢æœ‰å•ç‹¬çš„å¤„ç†
     uaf_lastTurnNotTrain = true;
   }
 
-  if (turn == 11)//ÏàÌ¸Ë¢ĞÂ
+  if (turn == 11)//ç›¸è°ˆåˆ·æ–°
   {
     assert(isRacing);
     uaf_xiangtanRemain = 3;
   }
-  else if (turn == 23)//µÚÒ»ÄêÄêµ×
+  else if (turn == 23)//ç¬¬ä¸€å¹´å¹´åº•
   {
     uaf_runCompetition(0);
-    //Äêµ×ÊÂ¼ş£¬ÌåÁ¦µÍÑ¡ÔñÌåÁ¦£¬·ñÔòÑ¡ÊôĞÔ
+    //å¹´åº•äº‹ä»¶ï¼Œä½“åŠ›ä½é€‰æ‹©ä½“åŠ›ï¼Œå¦åˆ™é€‰å±æ€§
     {
-      int vitalSpace = maxVital - vital;//»¹²î¶àÉÙÌåÁ¦Âú
+      int vitalSpace = maxVital - vital;//è¿˜å·®å¤šå°‘ä½“åŠ›æ»¡
       handleFriendFixedEvent();
       if (vitalSpace >= 20)
         addVital(20);
       else
         addAllStatus(5);
     }
-    printEvents("uaf´ó»á1½áÊø");
+    printEvents("uafå¤§ä¼š1ç»“æŸ");
   }
-  else if (turn == 29)//µÚ¶şÄê¼Ì³Ğ
+  else if (turn == 29)//ç¬¬äºŒå¹´ç»§æ‰¿
   {
 
     for (int i = 0; i < 5; i++)
-      addStatus(i, zhongMaBlueCount[i] * 6); //À¶Òò×ÓµäĞÍÖµ
+      addStatus(i, zhongMaBlueCount[i] * 6); //è“å› å­å…¸å‹å€¼
 
-    double factor = double(rand() % 65536) / 65536 * 2;//¾ç±¾Òò×ÓËæ»ú0~2±¶
+    double factor = double(rand() % 65536) / 65536 * 2;//å‰§æœ¬å› å­éšæœº0~2å€
     for (int i = 0; i < 5; i++)
-      addStatus(i, int(factor*zhongMaExtraBonus[i])); //¾ç±¾Òò×Ó
-    skillPt += int((0.5 + 0.5 * factor) * zhongMaExtraBonus[5]);//ÂÒÆß°ËÔã¼¼ÄÜµÄµÈĞ§pt
-
-    for (int i = 0; i < 5; i++)
-      fiveStatusLimit[i] += zhongMaBlueCount[i] * 2; //ÊôĞÔÉÏÏŞ--ÖÖÂí»ù´¡Öµ¡£18À¶Á½´Î¼Ì³Ğ¹²¼Ó´óÔ¼36ÉÏÏŞ£¬Ã¿´ÎÃ¿¸öÀ¶Òò×Ó+1ÉÏÏŞ£¬1200ÕÛ°ëÔÙ³Ë2
+      addStatus(i, int(factor*zhongMaExtraBonus[i])); //å‰§æœ¬å› å­
+    skillPt += int((0.5 + 0.5 * factor) * zhongMaExtraBonus[5]);//ä¹±ä¸ƒå…«ç³ŸæŠ€èƒ½çš„ç­‰æ•ˆpt
 
     for (int i = 0; i < 5; i++)
-      fiveStatusLimit[i] += rand() % 8; //ÊôĞÔÉÏÏŞ--ºóÁ½´Î¼Ì³ĞËæ»úÔö¼Ó
+      fiveStatusLimit[i] += zhongMaBlueCount[i] * 2; //å±æ€§ä¸Šé™--ç§é©¬åŸºç¡€å€¼ã€‚18è“ä¸¤æ¬¡ç»§æ‰¿å…±åŠ å¤§çº¦36ä¸Šé™ï¼Œæ¯æ¬¡æ¯ä¸ªè“å› å­+1ä¸Šé™ï¼Œ1200æŠ˜åŠå†ä¹˜2
 
-    printEvents("µÚ¶şÄê¼Ì³Ğ");
+    for (int i = 0; i < 5; i++)
+      fiveStatusLimit[i] += rand() % 8; //å±æ€§ä¸Šé™--åä¸¤æ¬¡ç»§æ‰¿éšæœºå¢åŠ 
+
+    printEvents("ç¬¬äºŒå¹´ç»§æ‰¿");
   }
   else if (turn == 35)//uaf2
   {
     uaf_runCompetition(1);
-    printEvents("uaf´ó»á2½áÊø");
+    printEvents("uafå¤§ä¼š2ç»“æŸ");
   }
 
-  else if (turn == 47)//µÚ¶şÄêÄêµ×
+  else if (turn == 47)//ç¬¬äºŒå¹´å¹´åº•
   {
     uaf_runCompetition(2);
-    //Äêµ×ÊÂ¼ş£¬ÌåÁ¦µÍÑ¡ÔñÌåÁ¦£¬·ñÔòÑ¡ÊôĞÔ
+    //å¹´åº•äº‹ä»¶ï¼Œä½“åŠ›ä½é€‰æ‹©ä½“åŠ›ï¼Œå¦åˆ™é€‰å±æ€§
     {
-      int vitalSpace = maxVital - vital;//»¹²î¶àÉÙÌåÁ¦Âú
+      int vitalSpace = maxVital - vital;//è¿˜å·®å¤šå°‘ä½“åŠ›æ»¡
       if (vitalSpace >= 30)
         addVital(30);
       else
         addAllStatus(8);
     }
-    printEvents("uaf´ó»á3½áÊø");
+    printEvents("uafå¤§ä¼š3ç»“æŸ");
   }
-  else if (turn == 48)//³é½±
+  else if (turn == 48)//æŠ½å¥–
   {
     int rd = rand() % 100;
-    if (rd < 16)//ÎÂÈª»òÒ»µÈ½±
+    if (rd < 16)//æ¸©æ³‰æˆ–ä¸€ç­‰å¥–
     {
       addVital(30);
       addAllStatus(10);
       addMotivation(2);
 
-      printEvents("³é½±£ºÄã³éÖĞÁËÎÂÈª/Ò»µÈ½±");
+      printEvents("æŠ½å¥–ï¼šä½ æŠ½ä¸­äº†æ¸©æ³‰/ä¸€ç­‰å¥–");
     }
-    else if (rd < 16 + 27)//¶şµÈ½±
+    else if (rd < 16 + 27)//äºŒç­‰å¥–
     {
       addVital(20);
       addAllStatus(5);
       addMotivation(1);
-      printEvents("³é½±£ºÄã³éÖĞÁË¶şµÈ½±");
+      printEvents("æŠ½å¥–ï¼šä½ æŠ½ä¸­äº†äºŒç­‰å¥–");
     }
-    else if (rd < 16 + 27 + 46)//ÈıµÈ½±
+    else if (rd < 16 + 27 + 46)//ä¸‰ç­‰å¥–
     {
       addVital(20);
-      printEvents("³é½±£ºÄã³éÖĞÁËÈıµÈ½±");
+      printEvents("æŠ½å¥–ï¼šä½ æŠ½ä¸­äº†ä¸‰ç­‰å¥–");
     }
-    else//²ŞÖ½
+    else//å•çº¸
     {
       addMotivation(-1);
-      printEvents("³é½±£ºÄã³éÖĞÁË²ŞÖ½");
+      printEvents("æŠ½å¥–ï¼šä½ æŠ½ä¸­äº†å•çº¸");
     }
   }
   else if (turn == 49)
   {
     skillScore += 170;
-    printEvents("¹ÌÓĞµÈ¼¶+1");
+    printEvents("å›ºæœ‰ç­‰çº§+1");
   }
-  else if (turn == 53)//µÚÈıÄê¼Ì³Ğ
+  else if (turn == 53)//ç¬¬ä¸‰å¹´ç»§æ‰¿
   {
     for (int i = 0; i < 5; i++)
-      addStatus(i, zhongMaBlueCount[i] * 6); //À¶Òò×ÓµäĞÍÖµ
+      addStatus(i, zhongMaBlueCount[i] * 6); //è“å› å­å…¸å‹å€¼
 
-    double factor = double(rand() % 65536) / 65536 * 2;//¾ç±¾Òò×ÓËæ»ú0~2±¶
+    double factor = double(rand() % 65536) / 65536 * 2;//å‰§æœ¬å› å­éšæœº0~2å€
     for (int i = 0; i < 5; i++)
-      addStatus(i, int(factor * zhongMaExtraBonus[i])); //¾ç±¾Òò×Ó
-    skillPt += int((0.5 + 0.5 * factor) * zhongMaExtraBonus[5]);//ÂÒÆß°ËÔã¼¼ÄÜµÄµÈĞ§pt
-
-    for (int i = 0; i < 5; i++)
-      fiveStatusLimit[i] += zhongMaBlueCount[i] * 2; //ÊôĞÔÉÏÏŞ--ÖÖÂí»ù´¡Öµ¡£18À¶Á½´Î¼Ì³Ğ¹²¼Ó´óÔ¼36ÉÏÏŞ£¬Ã¿´ÎÃ¿¸öÀ¶Òò×Ó+1ÉÏÏŞ£¬1200ÕÛ°ëÔÙ³Ë2
+      addStatus(i, int(factor * zhongMaExtraBonus[i])); //å‰§æœ¬å› å­
+    skillPt += int((0.5 + 0.5 * factor) * zhongMaExtraBonus[5]);//ä¹±ä¸ƒå…«ç³ŸæŠ€èƒ½çš„ç­‰æ•ˆpt
 
     for (int i = 0; i < 5; i++)
-      fiveStatusLimit[i] += rand() % 8; //ÊôĞÔÉÏÏŞ--ºóÁ½´Î¼Ì³ĞËæ»úÔö¼Ó
+      fiveStatusLimit[i] += zhongMaBlueCount[i] * 2; //å±æ€§ä¸Šé™--ç§é©¬åŸºç¡€å€¼ã€‚18è“ä¸¤æ¬¡ç»§æ‰¿å…±åŠ å¤§çº¦36ä¸Šé™ï¼Œæ¯æ¬¡æ¯ä¸ªè“å› å­+1ä¸Šé™ï¼Œ1200æŠ˜åŠå†ä¹˜2
 
-    printEvents("µÚÈıÄê¼Ì³Ğ");
+    for (int i = 0; i < 5; i++)
+      fiveStatusLimit[i] += rand() % 8; //å±æ€§ä¸Šé™--åä¸¤æ¬¡ç»§æ‰¿éšæœºå¢åŠ 
+
+    printEvents("ç¬¬ä¸‰å¹´ç»§æ‰¿");
 
     if (persons[6].friendship >= 60)
     {
-      skillScore += 170;//¹ÌÓĞ¼¼ÄÜµÈ¼¶+1
+      skillScore += 170;//å›ºæœ‰æŠ€èƒ½ç­‰çº§+1
       addMotivation(1);
     }
     else
@@ -1371,40 +1371,40 @@ void Game::checkFixedEvents(std::mt19937_64& rand)
   else if (turn == 59)//uaf4
   {
     uaf_runCompetition(3);
-    printEvents("uaf´ó»á4½áÊø");
+    printEvents("uafå¤§ä¼š4ç»“æŸ");
     }
-  else if (turn == 65)//ĞÄÇé+1£¬¾öËÀµÄ¾õÎòhint+1
+  else if (turn == 65)//å¿ƒæƒ…+1ï¼Œå†³æ­»çš„è§‰æ‚Ÿhint+1
   {
     addMotivation(1);
-    skillPt += 5;//Õâ¸öhintÒ»°ã²»µã
+    skillPt += 5;//è¿™ä¸ªhintä¸€èˆ¬ä¸ç‚¹
   }
   else if (turn == 70)
   {
-    skillScore += 170;//¹ÌÓĞ¼¼ÄÜµÈ¼¶+1
+    skillScore += 170;//å›ºæœ‰æŠ€èƒ½ç­‰çº§+1
   }
   else if (turn == 71)//uaf5
   {
     uaf_runCompetition(4);
-    printEvents("uaf´ó»á5½áÊø");
+    printEvents("uafå¤§ä¼š5ç»“æŸ");
   }
   else if (turn == 73)//ura1
   {
     assert(isRacing);
     runRace(10, 40);
-    printEvents("ura1½áÊø");
+    printEvents("ura1ç»“æŸ");
   }
   else if (turn == 75)//ura2
   {
     assert(isRacing);
     runRace(10, 60);
-    printEvents("ura2½áÊø");
+    printEvents("ura2ç»“æŸ");
   }
-  else if (turn == 77)//ura3£¬ÓÎÏ·½áÊø
+  else if (turn == 77)//ura3ï¼Œæ¸¸æˆç»“æŸ
   {
     assert(isRacing);
     runRace(10, 80);
 
-    //¼ÇÕß
+    //è®°è€…
     if (persons[7].friendship >= 80)
     {
       addAllStatus(5);
@@ -1424,8 +1424,8 @@ void Game::checkFixedEvents(std::mt19937_64& rand)
       skillPt += 5;
     }
 
-    bool allWin = true;//Ã¿Ò»³¡¶¼15win
-    bool allTotallyWin = true;//Ã¿Ò»³¡¶¼12winÒÔÉÏ
+    bool allWin = true;//æ¯ä¸€åœºéƒ½15win
+    bool allTotallyWin = true;//æ¯ä¸€åœºéƒ½12winä»¥ä¸Š
 
     for (int c = 0; c < 5; c++)
     {
@@ -1443,14 +1443,14 @@ void Game::checkFixedEvents(std::mt19937_64& rand)
     }
     if (allWin)
     {
-      skillPt += 40;//È«ÉíÈ«ÁéÓë½ø»¯
+      skillPt += 40;//å…¨èº«å…¨çµä¸è¿›åŒ–
       addAllStatus(55);
       skillPt += 140;
       //cout << 1;
     }
     else if (allTotallyWin)
     {
-      skillPt += 40;//È«ÉíÈ«ÁéÓë½ø»¯
+      skillPt += 40;//å…¨èº«å…¨çµä¸è¿›åŒ–
       addAllStatus(30);
       skillPt += 90;
       //cout << 2;
@@ -1473,30 +1473,30 @@ void Game::checkFixedEvents(std::mt19937_64& rand)
     }
     if (totalLevel >= 1200)
     {
-      skillPt += 60;//ÈıÕÛ½ğÉÏÎ»
+      skillPt += 60;//ä¸‰æŠ˜é‡‘ä¸Šä½
     }
     else
     {
-      skillPt += 20;//Ò»ÕÛ½ğÉÏÎ»
+      skillPt += 20;//ä¸€æŠ˜é‡‘ä¸Šä½
     }
 
 
-    //ÓÑÈË¿¨ÊÂ¼ş
+    //å‹äººå¡äº‹ä»¶
     handleFriendFixedEvent();
 
     addAllStatus(5);
     skillPt += 30;
 
-    printEvents("ura3½áÊø£¬ÓÎÏ·½áËã");
+    printEvents("ura3ç»“æŸï¼Œæ¸¸æˆç»“ç®—");
   }
 }
 
 void Game::checkRandomEvents(std::mt19937_64& rand)
 {
   if (turn>=72)
-    return;//uraÆÚ¼ä²»»á·¢Éú¸÷ÖÖËæ»úÊÂ¼ş
+    return;//uraæœŸé—´ä¸ä¼šå‘ç”Ÿå„ç§éšæœºäº‹ä»¶
 
-  //ÓÑÈË»á²»»á½âËø³öĞĞ
+  //å‹äººä¼šä¸ä¼šè§£é”å‡ºè¡Œ
   if (lianghua_type != 0)
   {
     Person& p = persons[lianghua_personId];
@@ -1506,16 +1506,16 @@ void Game::checkRandomEvents(std::mt19937_64& rand)
       double unlockOutgoingProb = p.friendship >= 60 ?
         GameConstants::FriendUnlockOutgoingProbEveryTurnHighFriendship :
         GameConstants::FriendUnlockOutgoingProbEveryTurnLowFriendship;
-      if (randBool(rand, unlockOutgoingProb))//Æô¶¯
+      if (randBool(rand, unlockOutgoingProb))//å¯åŠ¨
       {
         handleFriendUnlock(rand);
       }
     }
   }
 
-  //Ä£Äâ¸÷ÖÖËæ»úÊÂ¼ş
+  //æ¨¡æ‹Ÿå„ç§éšæœºäº‹ä»¶
 
-  //Ö§Ô®¿¨Á¬ĞøÊÂ¼ş£¬Ëæ»ú¸øÒ»¸ö¿¨¼Ó5î¿°í
+  //æ”¯æ´å¡è¿ç»­äº‹ä»¶ï¼Œéšæœºç»™ä¸€ä¸ªå¡åŠ 5ç¾ç»Š
   if (randBool(rand, GameConstants::EventProb))
   {
     int card = rand() % 6;
@@ -1523,64 +1523,64 @@ void Game::checkRandomEvents(std::mt19937_64& rand)
     //addAllStatus(4);
     addStatus(rand() % 5, eventStrength);
     skillPt += eventStrength;
-    printEvents("Ä£ÄâÖ§Ô®¿¨Ëæ»úÊÂ¼ş£º" + persons[card].cardParam.cardName + " µÄî¿°í+5£¬ptºÍËæ»úÊôĞÔ+" + to_string(eventStrength));
+    printEvents("æ¨¡æ‹Ÿæ”¯æ´å¡éšæœºäº‹ä»¶ï¼š" + persons[card].cardParam.cardName + " çš„ç¾ç»Š+5ï¼Œptå’Œéšæœºå±æ€§+" + to_string(eventStrength));
 
-    //Ö§Ô®¿¨Ò»°ãÊÇÇ°¼¸¸öÊÂ¼ş¼ÓĞÄÇé
+    //æ”¯æ´å¡ä¸€èˆ¬æ˜¯å‰å‡ ä¸ªäº‹ä»¶åŠ å¿ƒæƒ…
     if (randBool(rand, 0.4 * (1.0 - turn * 1.0 / TOTAL_TURN)))
     {
       addMotivation(1);
-      printEvents("Ä£ÄâÖ§Ô®¿¨Ëæ»úÊÂ¼ş£ºĞÄÇé+1");
+      printEvents("æ¨¡æ‹Ÿæ”¯æ´å¡éšæœºäº‹ä»¶ï¼šå¿ƒæƒ…+1");
     }
     if (randBool(rand, 0.5))
     {
       addVital(10);
-      printEvents("Ä£ÄâÖ§Ô®¿¨Ëæ»úÊÂ¼ş£ºÌåÁ¦+10");
+      printEvents("æ¨¡æ‹Ÿæ”¯æ´å¡éšæœºäº‹ä»¶ï¼šä½“åŠ›+10");
     }
     else if (randBool(rand, 0.03))
     {
       addVital(-10);
-      printEvents("Ä£ÄâÖ§Ô®¿¨Ëæ»úÊÂ¼ş£ºÌåÁ¦-10");
+      printEvents("æ¨¡æ‹Ÿæ”¯æ´å¡éšæœºäº‹ä»¶ï¼šä½“åŠ›-10");
     }
     if (randBool(rand, 0.03))
     {
       isPositiveThinking = true;
-      printEvents("Ä£ÄâÖ§Ô®¿¨Ëæ»úÊÂ¼ş£º»ñµÃ¡°ÕıÏòË¼¿¼¡±");
+      printEvents("æ¨¡æ‹Ÿæ”¯æ´å¡éšæœºäº‹ä»¶ï¼šè·å¾—â€œæ­£å‘æ€è€ƒâ€");
     }
   }
 
-  //Ä£ÄâÂíÄïËæ»úÊÂ¼ş
+  //æ¨¡æ‹Ÿé©¬å¨˜éšæœºäº‹ä»¶
   if (randBool(rand, 0.1))
   {
     addAllStatus(3);
-    printEvents("Ä£ÄâÂíÄïËæ»úÊÂ¼ş£ºÈ«ÊôĞÔ+3");
+    printEvents("æ¨¡æ‹Ÿé©¬å¨˜éšæœºäº‹ä»¶ï¼šå…¨å±æ€§+3");
   }
 
-  //¼ÓÌåÁ¦
+  //åŠ ä½“åŠ›
   if (randBool(rand, 0.10))
   {
     addVital(5);
-    printEvents("Ä£ÄâËæ»úÊÂ¼ş£ºÌåÁ¦+5");
+    printEvents("æ¨¡æ‹Ÿéšæœºäº‹ä»¶ï¼šä½“åŠ›+5");
   }
 
-  //¼Ó30ÌåÁ¦£¨³Ô·¹ÊÂ¼ş£©,²»¸Ò³Ô·¹ÁËËùÒÔ¸Ä³É10ÌåÁ¦
+  //åŠ 30ä½“åŠ›ï¼ˆåƒé¥­äº‹ä»¶ï¼‰,ä¸æ•¢åƒé¥­äº†æ‰€ä»¥æ”¹æˆ10ä½“åŠ›
   if (randBool(rand, 0.02))
   {
     addVital(10);
-    printEvents("Ä£ÄâËæ»úÊÂ¼ş£ºÌåÁ¦+10");
+    printEvents("æ¨¡æ‹Ÿéšæœºäº‹ä»¶ï¼šä½“åŠ›+10");
   }
 
-  //¼ÓĞÄÇé
+  //åŠ å¿ƒæƒ…
   if (randBool(rand, 0.02))
   {
     addMotivation(1);
-    printEvents("Ä£ÄâËæ»úÊÂ¼ş£ºĞÄÇé+1");
+    printEvents("æ¨¡æ‹Ÿéšæœºäº‹ä»¶ï¼šå¿ƒæƒ…+1");
   }
 
-  //µôĞÄÇé
+  //æ‰å¿ƒæƒ…
   if (randBool(rand, 0.04))
   {
     addMotivation(-1);
-    printEvents("Ä£ÄâËæ»úÊÂ¼ş£º\033[0m\033[33mĞÄÇé-1\033[0m\033[32m");
+    printEvents("æ¨¡æ‹Ÿéšæœºäº‹ä»¶ï¼š\033[0m\033[33må¿ƒæƒ…-1\033[0m\033[32m");
   }
 
 }
@@ -1588,17 +1588,17 @@ void Game::checkRandomEvents(std::mt19937_64& rand)
 void Game::applyTrainingAndNextTurn(std::mt19937_64& rand, Action action)
 {
   if (isEnd()) return;
-  //assert(turn < TOTAL_TURN && "Game::applyTrainingAndNextTurnÓÎÏ·ÒÑ½áÊø");
-  assert(!isRacing && "±ÈÈü»ØºÏ¶¼ÔÚcheckEventAfterTrainÀïÌø¹ıÁË");
+  //assert(turn < TOTAL_TURN && "Game::applyTrainingAndNextTurnæ¸¸æˆå·²ç»“æŸ");
+  assert(!isRacing && "æ¯”èµ›å›åˆéƒ½åœ¨checkEventAfterTrainé‡Œè·³è¿‡äº†");
   bool suc = applyTraining(rand, action);
-  assert(suc && "Game::applyTrainingAndNextTurnÑ¡ÔñÁË²»ºÏ·¨µÄÑµÁ·");
+  assert(suc && "Game::applyTrainingAndNextTurné€‰æ‹©äº†ä¸åˆæ³•çš„è®­ç»ƒ");
 
   checkEventAfterTrain(rand);
   if (isEnd()) return;
 
-  assert(!isRacing && "±ÈÈü»ØºÏ¶¼ÔÚcheckEventAfterTrainÀïÌø¹ıÁË");
+  assert(!isRacing && "æ¯”èµ›å›åˆéƒ½åœ¨checkEventAfterTrainé‡Œè·³è¿‡äº†");
 
-  // Èç¹ûÒªÖ§³ÖÔÚÓÎÏ·ÖĞ¸Ä±äµÃÒâÂÊ£¬ĞèÒªÔÚÕâÀï¸üĞÂµÃÒâÂÊµÄÖµ
+  // å¦‚æœè¦æ”¯æŒåœ¨æ¸¸æˆä¸­æ”¹å˜å¾—æ„ç‡ï¼Œéœ€è¦åœ¨è¿™é‡Œæ›´æ–°å¾—æ„ç‡çš„å€¼
   randomDistributeCards(rand);
 }
 

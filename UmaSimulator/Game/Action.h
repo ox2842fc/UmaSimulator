@@ -13,7 +13,7 @@ enum TrainActionTypeEnum :int16_t
   TRA_rest,
   TRA_outgoing,
   TRA_race,
-  TRA_redistributeCardsForTest = -1 //Ê¹ÓÃÕâ¸ö±ê¼ÇÊ±£¬ËµÃ÷ÒªrandomDistributeCards£¬ÓÃÓÚ²âÊÔai·ÖÊı£¬ÔÚSearch::searchSingleActionThreadÖĞÊ¹ÓÃ
+  TRA_redistributeCardsForTest = -1 //ä½¿ç”¨è¿™ä¸ªæ ‡è®°æ—¶ï¼Œè¯´æ˜è¦randomDistributeCardsï¼Œç”¨äºæµ‹è¯•aiåˆ†æ•°ï¼Œåœ¨Search::searchSingleActionThreadä¸­ä½¿ç”¨
 };
 enum XiangtanTypeEnum :int16_t
 {
@@ -29,9 +29,9 @@ enum XiangtanTypeEnum :int16_t
   XT_r,
   XT_y
 };
-struct Action //Ò»¸ö»ØºÏµÄ²Ù×÷
+struct Action //ä¸€ä¸ªå›åˆçš„æ“ä½œ
 {
-  static const int MAX_ACTION_TYPE = 10 * 5 + 3;//10ÖÖÏàÌ¸*5ÖÖÑµÁ·+Íâ³öĞİÏ¢±ÈÈü
+  static const int MAX_ACTION_TYPE = 10 * 5 + 3;//10ç§ç›¸è°ˆ*5ç§è®­ç»ƒ+å¤–å‡ºä¼‘æ¯æ¯”èµ›
   static const int XiangtanFromColor[10];
   static const int XiangtanToColor[10];
   static const int XiangtanNumCost[10];
@@ -39,10 +39,10 @@ struct Action //Ò»¸ö»ØºÏµÄ²Ù×÷
   static const std::string xiangtanName[10];
   static const Action Action_RedistributeCardsForTest;
 
-  int16_t train;//01234ËÙÄÍÁ¦¸ùÖÇ£¬5Íâ³ö£¬6ĞİÏ¢£¬7±ÈÈü 
-  //×¢£ºÍâ³öÊÇÓÅÏÈÓÑÈËÍâ³ö£¬Ã»ÓĞÔÙÆÕÍ¨Íâ³ö£¬²»Ìá¹©Ñ¡Ïî
+  int16_t train;//01234é€Ÿè€åŠ›æ ¹æ™ºï¼Œ5å¤–å‡ºï¼Œ6ä¼‘æ¯ï¼Œ7æ¯”èµ› 
+  //æ³¨ï¼šå¤–å‡ºæ˜¯ä¼˜å…ˆå‹äººå¤–å‡ºï¼Œæ²¡æœ‰å†æ™®é€šå¤–å‡ºï¼Œä¸æä¾›é€‰é¡¹
   
-  int16_t xiangtanType;//ÏàÌ¸µÄ10ÖÖ·½Ê½£¬ÒÀ´ÎÊÇ²»Ì¸£¬6ÖÖµ¥´ÎÏàÌ¸£¬3ÖÖÁ½´ÎÏàÌ¸
+  int16_t xiangtanType;//ç›¸è°ˆçš„10ç§æ–¹å¼ï¼Œä¾æ¬¡æ˜¯ä¸è°ˆï¼Œ6ç§å•æ¬¡ç›¸è°ˆï¼Œ3ç§ä¸¤æ¬¡ç›¸è°ˆ
 
   int toInt() const;
   std::string toString() const;

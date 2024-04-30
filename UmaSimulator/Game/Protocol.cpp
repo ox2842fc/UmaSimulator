@@ -7,8 +7,8 @@
 #include "Game.h"
 using namespace std;
 using json = nlohmann::json;
-// ÊÇ·ñ°ÑµÍÆÆ¿¨µ±×öÂúÆÆ´¦Àí£¨»áµ¼ÖÂÒ»¶¨µÄÔ¤²âÆ«²î£©
-// ÎªTrueÊ±»á°ÑËùÓĞIDµÄ×î¸ßÎ»¸ÄÎªÂúÆÆ£¨ÂíÄï5xxx£¬¿¨4xxx£©
+// æ˜¯å¦æŠŠä½ç ´å¡å½“åšæ»¡ç ´å¤„ç†ï¼ˆä¼šå¯¼è‡´ä¸€å®šçš„é¢„æµ‹åå·®ï¼‰
+// ä¸ºTrueæ—¶ä¼šæŠŠæ‰€æœ‰IDçš„æœ€é«˜ä½æ”¹ä¸ºæ»¡ç ´ï¼ˆé©¬å¨˜5xxxï¼Œå¡4xxxï¼‰
 static bool maskUmaId = true;
 
 int mask_umaId(int umaId)
@@ -20,7 +20,7 @@ bool Game::loadGameFromJson(std::string jsonStr)
 {
   if (jsonStr == "[test]" || jsonStr == "{\"Result\":1,\"Reason\":null}")
   {
-    std::cout << "ÒÑ³É¹¦ÓëURA½¨Á¢Á¬½Ó£¬µ«ÔİÎ´½ÓÊÕµ½»ØºÏĞÅÏ¢£¬µÈ´ıÓÎÏ·¿ªÊ¼" << std::endl;
+    std::cout << "å·²æˆåŠŸä¸URAå»ºç«‹è¿æ¥ï¼Œä½†æš‚æœªæ¥æ”¶åˆ°å›åˆä¿¡æ¯ï¼Œç­‰å¾…æ¸¸æˆå¼€å§‹" << std::endl;
     return false;
   }
   try
@@ -115,19 +115,19 @@ bool Game::loadGameFromJson(std::string jsonStr)
   }
   catch (string e)
   {
-    cout << "¶ÁÈ¡ÓÎÏ·ĞÅÏ¢json³ö´í£º" << e << endl;
+    cout << "è¯»å–æ¸¸æˆä¿¡æ¯jsonå‡ºé”™ï¼š" << e << endl;
     //cout << "-- json --" << endl << jsonStr << endl;
     return false;
   }
   catch (std::exception& e)
   {
-    cout << "¶ÁÈ¡ÓÎÏ·ĞÅÏ¢json³ö´í£ºÎ´Öª´íÎó" << endl << e.what() << endl;
+    cout << "è¯»å–æ¸¸æˆä¿¡æ¯jsonå‡ºé”™ï¼šæœªçŸ¥é”™è¯¯" << endl << e.what() << endl;
     //cout << "-- json --" << endl << jsonStr << endl;
     return false;
   }
   catch (...)
   {
-    cout << "¶ÁÈ¡ÓÎÏ·ĞÅÏ¢json³ö´í£ºÎ´Öª´íÎó"  << endl;
+    cout << "è¯»å–æ¸¸æˆä¿¡æ¯jsonå‡ºé”™ï¼šæœªçŸ¥é”™è¯¯"  << endl;
     return false;
   }
 
