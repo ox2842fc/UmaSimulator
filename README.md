@@ -1,7 +1,7 @@
-# 2024.2.28  UAF剧本的育成模拟器开始开发！
+This tool is just for **algorithm learning**. Don't use it for illegal purpose.   
+You can compile this tool by yourself. Change the settings in config.h, then you can evaluate the cardset strength or have a simulation game with this program.    
+You can also learn the game mechanisms(such as the formula of training status gain) from the source code (mainly Game.h/cpp)
 
-
-QQ群： ![](Document/src/image1.png) **751367941**
-
-
-**If it's inconvenient for you to join the QQ group, you can**![](Document/src/image3.png) **.**
+Although it's just a "very advanced calculator" which can **never change** the status of the game. Many people think this is an **"illegal tool"(不正ツール)**.    
+So I would **NOT** provide more information for the installation.    
+Later I will publish a **"absolutely legal"** version, whose game status is inputed **manually** so it will need no modification to the game program itself.   

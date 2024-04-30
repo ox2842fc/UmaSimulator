@@ -28,7 +28,11 @@ void main_testScoreNoSearch()
   const string modelpath = "";
   const int threadNum = 8;
   int batchsize = 1;
-#else
+#elif USE_BACKEND == BACKEND_ONNX
+  const string modelpath = "./db/model.onnx";
+  const int threadNum = 4;
+  int batchsize = 1024;
+#else 
   const string modelpath = "./db/model.txt";
   const int threadNum = 16;
   int batchsize = 1024;
@@ -68,7 +72,7 @@ void main_testScoreNoSearch()
   game.newGame(rand, false, test.umaId, test.umaStars, &test.cards[0], &test.zhongmaBlue[0], &test.zhongmaBonus[0]);
   
   auto start = std::chrono::high_resolution_clock::now();
-  auto value = search.evaluateNewGame(game, test.totalGames, radicalFactor, rand);
+  auto value = search.evaluateNewGame(game, rand);
   auto stop = std::chrono::high_resolution_clock::now();
 
   cout << "平均分数=\033[1;32m" << int(value.scoreMean) << " \033[0m" << "胡局分数=\033[1;32m" << int(value.value) << "\033[0m " << "标准差=\033[1;32m" << int(value.scoreStdev) << "\033[0m  " << endl;

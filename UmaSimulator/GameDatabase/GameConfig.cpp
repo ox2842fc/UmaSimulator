@@ -10,14 +10,16 @@ int GameConfig::eventStrength = 20;
 #if USE_BACKEND != BACKEND_NONE      //神经网络版
 #if USE_BACKEND == BACKEND_LIBTORCH      //神经网络版
 string GameConfig::modelPath = "db/model_traced.pt";
+#elif USE_BACKEND == BACKEND_ONNX      
+string GameConfig::modelPath = "db/model.onnx";
 #else
 string GameConfig::modelPath = "db/model.txt";
 #endif
 int GameConfig::threadNum = 4;
-int GameConfig::batchSize = 128;
-int GameConfig::searchSingleMax = 4096;
+int GameConfig::batchSize = 256;
+int GameConfig::searchSingleMax = 5120;
 int GameConfig::searchTotalMax = 0;
-int GameConfig::searchGroupSize = 512;
+int GameConfig::searchGroupSize = 1024;
 int GameConfig::maxDepth = TOTAL_TURN;
 #else  //手写逻辑版
 string GameConfig::modelPath = "";
